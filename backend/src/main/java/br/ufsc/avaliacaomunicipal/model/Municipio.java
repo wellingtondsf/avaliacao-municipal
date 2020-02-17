@@ -18,4 +18,8 @@ public class Municipio {
 
     @Column(name = "NO_MUNICIPIO")
     private String nome;
+
+    @ManyToOne
+    @JoinColumn(name = "CO_ESTADO")
+    private Estado estado;
 }

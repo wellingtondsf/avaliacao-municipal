@@ -11,19 +11,18 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "RL_AVALIACAO_RESPONDIDA")
-public class RlAvaliacaoRespondida implements Serializable {
+@Table(name = "TB_QUESTIONARIO")
+public class Questionario implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "CO_USUARIO")
     private Usuario usuario;
 
-    @Id
     @OneToMany
     @JoinColumn(name = "CO_QUESTAO")
     private List<Questao> questoes;
-
-    @Column(name = "DT_AVALIACAO")
-    private LocalDate dataAvaliacao;
 }
