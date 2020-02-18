@@ -25,4 +25,8 @@ public class Questao {
 
     @Column(name = "QT_PONTOS")
     private Long pontos;
+
+    @ManyToOne
+    @JoinColumn(name = "CO_QUESTIONARIO")
+    private Questionario questionario;
 }

@@ -19,11 +19,7 @@ public class Questionario implements Serializable {
     @Column(name = "CO_SEQ_QUESTIONAIRO",updatable = false, nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "CO_USUARIO")
-    private Usuario usuario;
+    @Column(name = "NO_QUESTIONARIO")
+    private String nome;
 
-    @OneToMany
-    @JoinColumn(name = "CO_QUESTAO")
-    private List<Questao> questoes;
 }

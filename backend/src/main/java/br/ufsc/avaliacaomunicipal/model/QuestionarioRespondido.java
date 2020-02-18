@@ -17,17 +17,13 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "RL_QUESTIONARIO_RESPOSTAS")
-public class RlQuestionarioRespostas {
+@Table(name = "TB_QUESTIONARIO_RESPONDIDO")
+public class QuestionarioRespondido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CO_SEQ_RESPOSTA",updatable = false, nullable = false)
+	@Column(name = "CO_SEQ_QUESTIONARIO_RESPONDIDO",updatable = false, nullable = false)
 	private Long id;
-
-	@ManyToOne
-	@JoinColumn(name = "CO_QUESTAO")
-	private Questao questao;
 
 	@ManyToOne
 	@JoinColumn(name = "CO_QUESTIONARIO")
@@ -36,6 +32,10 @@ public class RlQuestionarioRespostas {
 	@ManyToOne
 	@JoinColumn(name = "CO_MUNICIPIO")
 	private Municipio municipio;
+
+	@ManyToOne
+	@JoinColumn(name = "CO_USUARIO")
+	private Usuario usuario;
 
 	@Column(name = "DT_RESPOSTA")
 	private LocalDate dataResposta;
