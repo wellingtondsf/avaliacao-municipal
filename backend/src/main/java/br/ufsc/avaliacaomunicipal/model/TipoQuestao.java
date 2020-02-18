@@ -12,8 +12,8 @@ import javax.persistence.*;
 public class TipoQuestao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CO_SEQ_TP_QUESTAO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CO_SEQ_TP_QUESTAO",updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "NO_QUESTAO")

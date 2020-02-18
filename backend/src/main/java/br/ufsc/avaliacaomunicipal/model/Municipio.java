@@ -12,8 +12,8 @@ import javax.persistence.*;
 public class Municipio {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CO_SEQ_MUNICIPIO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CO_SEQ_MUNICIPIO",updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "NO_MUNICIPIO")

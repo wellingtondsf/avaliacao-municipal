@@ -21,7 +21,8 @@ import lombok.Setter;
 public class RlQuestionarioRespostas {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CO_SEQ_RESPOSTA",updatable = false, nullable = false)
 	private Long id;
 
 	@ManyToOne

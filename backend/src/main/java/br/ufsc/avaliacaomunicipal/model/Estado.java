@@ -13,8 +13,8 @@ import java.util.List;
 public class Estado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CO_SEQ_ESTADO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CO_SEQ_ESTADO",updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "NO_ESTADO")

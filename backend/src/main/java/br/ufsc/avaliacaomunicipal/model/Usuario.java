@@ -12,10 +12,11 @@ import javax.persistence.*;
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CO_SEQ_USUARIO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CO_SEQ_USUARIO",updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "NU_CPF", length = 11)
+    @Column(name = "NU_CPF", length = 11, updatable = false, nullable = false)
     private String nuCpf;
+
 }

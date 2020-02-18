@@ -15,7 +15,8 @@ import java.util.List;
 public class Questionario implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CO_SEQ_QUESTIONAIRO",updatable = false, nullable = false)
     private Long id;
 
     @ManyToOne
