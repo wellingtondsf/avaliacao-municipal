@@ -16,6 +16,6 @@ public class TipoQuestao {
     @Column(name = "CO_SEQ_TP_QUESTAO",updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "NO_QUESTAO")
+    @Column(name = "NO_TP_QUESTAO")
     private String nome;
 }

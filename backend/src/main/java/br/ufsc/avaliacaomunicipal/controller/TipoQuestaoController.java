@@ -24,8 +24,8 @@ public class TipoQuestaoController {
 
 
 	@GetMapping(value = "listarTipoQuestao", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<TipoQuestao> listarTipoQuestoes(){
-		return this.repository.findAll();
+	public ResponseEntity<List<TipoQuestao>> listarTipoQuestoes(){
+		return ResponseEntity.ok(this.repository.findAll());
 	}
 
 	@PostMapping(value = "inserirTipoQuestao", consumes = MediaType.APPLICATION_JSON_VALUE)

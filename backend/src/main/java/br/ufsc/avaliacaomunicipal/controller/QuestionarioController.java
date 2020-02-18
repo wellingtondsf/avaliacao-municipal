@@ -22,7 +22,9 @@ public class QuestionarioController {
 	private QuestionarioRepository repository;
 
 	@GetMapping(value = "listarQuestionario", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Questionario> listarQuestionarios (){return this.repository.findAll();}
+	public ResponseEntity<List<Questionario>> listarQuestionarios (){
+		return ResponseEntity.ok(this.repository.findAll());
+	}
 
 	@PostMapping(value = "inserirQuestionarios", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity inserirQuestionario(@RequestBody Questionario questionario){

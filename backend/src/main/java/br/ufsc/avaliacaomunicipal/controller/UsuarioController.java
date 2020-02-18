@@ -23,8 +23,8 @@ public class UsuarioController {
 	private UsuarioRepository repository;
 
 	@GetMapping(value = "listarUsuarios", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Usuario> listarUsuarios(){
-		return this.repository.findAll();
+	public ResponseEntity<List<Usuario>> listarUsuarios(){
+		return ResponseEntity.ok(this.repository.findAll());
 	}
 
 	@PostMapping(value = "inserirUsuario", consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -14,34 +14,27 @@ import org.springframework.web.bind.annotation.RestController;
 import br.ufsc.avaliacaomunicipal.model.QuestionarioRespondido;
 import br.ufsc.avaliacaomunicipal.repository.QuestionarioRespondidoRepository;
 
-@RequestMapping("/api/questionario-respostas/")
+@RequestMapping("/api/questionario-respondido/")
 @RestController
 public class QuestionarioRespondidoController {
 
 	@Autowired
 	private QuestionarioRespondidoRepository repository;
 
-
-
-	@GetMapping(value = "listarQuestionarioResposta", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<QuestionarioRespondido> listarQuestionarioResposta(){
-		return this.repository.findAll();
+	@GetMapping(value = "listarQuestionarioRespondido", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<QuestionarioRespondido>> listarQuestionarioRespondido(){
+		return ResponseEntity.ok(this.repository.findAll());
 	}
 
 	 @GetMapping(value = "listarRespostasPorCpf", produces = MediaType.APPLICATION_JSON_VALUE)
-	 public ResponseEntity<List<QuestionarioRespondido>> listarRespostasPorCpf (@RequestBody Long cpfUsuario){
+	 public ResponseEntity<List<QuestionarioRespondido>> listarRespondidoPorCpf (@RequestBody Long cpfUsuario){
 		 return ResponseEntity.ok(this.repository.findQuestinarioRespondidoPorUsuario());
 	}
 
-	@PostMapping(value = "inserirQuestionarioResposta", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> inserirQuestao(@RequestBody QuestionarioRespondido questionarioResposta){
-		repository.save(questionarioResposta);
+	@PostMapping(value = "inserirQuestionarioRespondido", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> inserirQuestionarioRespondido(@RequestBody QuestionarioRespondido questionarioRespondido){
+		repository.save(questionarioRespondido);
 		return ResponseEntity.ok("OK");
 	}
-
-	//antes de salvar verificar se ja foi respondida naquele ano para aquele tipo de questionario
-
-
-	//fazer um getter das respostas por cidadaoId
 
 }

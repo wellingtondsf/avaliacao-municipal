@@ -17,7 +17,7 @@ public class Questao {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "CO_TP_QUESTAO_")
+    @JoinColumn(name = "CO_TP_QUESTAO")
     private TipoQuestao tipoQuestao;
 
     @Column(name = "NO_QUESTAO")
