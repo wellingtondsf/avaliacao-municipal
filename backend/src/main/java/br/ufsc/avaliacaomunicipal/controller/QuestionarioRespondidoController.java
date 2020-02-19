@@ -28,7 +28,7 @@ public class QuestionarioRespondidoController {
 
 	 @GetMapping(value = "listarRespostasPorCpf", produces = MediaType.APPLICATION_JSON_VALUE)
 	 public ResponseEntity<List<QuestionarioRespondido>> listarRespondidoPorCpf (@RequestBody Long cpfUsuario){
-		 return ResponseEntity.ok(this.repository.findQuestinarioRespondidoPorUsuario());
+		 return ResponseEntity.ok(this.repository.findAllByCpfUsuario(cpfUsuario));
 	}
 
 	@PostMapping(value = "inserirQuestionarioRespondido", consumes = MediaType.APPLICATION_JSON_VALUE)

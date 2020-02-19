@@ -21,7 +21,7 @@ public class QuestionarioController {
 	@Autowired
 	private QuestionarioRepository repository;
 
-	@GetMapping(value = "listarQuestionario", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "listarQuestionarios", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Questionario>> listarQuestionarios (){
 		return ResponseEntity.ok(this.repository.findAll());
 	}

@@ -27,6 +27,11 @@ public class QuestaoController {
 		return this.repository.findAll();
 	}
 
+	@GetMapping(value = "listarQuestoesByQuestionarioId", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Questao> listarQuestoesByQuestionarioId(@RequestBody Long questionarioId){
+		return this.repository.findAllByQuestionarioId(questionarioId);
+	}
+
 	@PostMapping(value = "inserirQuestao", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity inserirQuestao(@RequestBody Questao questao){
 		repository.save(questao);
