@@ -6,16 +6,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufsc.avaliacaomunicipal.model.Questao;
 import br.ufsc.avaliacaomunicipal.repository.QuestaoRepository;
 
 @RequestMapping("/api/questao/")
+@CrossOrigin
 @RestController
 public class QuestaoController {
 
@@ -28,8 +31,8 @@ public class QuestaoController {
 	}
 
 	@GetMapping(value = "listarQuestoesByQuestionarioId", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Questao> listarQuestoesByQuestionarioId(@RequestBody Long questionarioId){
-		return this.repository.findAllByQuestionarioId(questionarioId);
+	public List<Questao> listarQuestoesByQuestionarioId(@RequestParam Long id){
+		return this.repository.findAllByQuestionarioId(id);
 	}
 
 	@PostMapping(value = "inserirQuestao", consumes = MediaType.APPLICATION_JSON_VALUE)
