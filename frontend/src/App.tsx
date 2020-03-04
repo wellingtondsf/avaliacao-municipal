@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import { ListaQuestoes } from "./components/ListaQuestoes";
+import { Home } from "./components/Home";
 
 const App = () => {
-  return <ListaQuestoes />;
+  return <Home />;
 };
 
 export default App;
