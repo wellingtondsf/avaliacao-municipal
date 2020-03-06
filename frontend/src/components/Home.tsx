@@ -1,56 +1,58 @@
-import { HFlow, Theme, useStyles } from "bold-ui";
+import { HFlow, Theme, useStyles, useTheme, Text } from "bold-ui";
 import React, { CSSProperties } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import { Sobre } from "./Sobre";
 import { ListaQuestoes } from "./ListaQuestoes";
+import { Sobre } from "./Sobre";
 
 export function Home() {
   const { classes } = useStyles(createStyles);
+  const theme = useTheme();
 
   return (
-    <Router>
-      <header className={classes.header}>
-        <HFlow>
+    <>
+      <Router>
+        <header className={classes.header}>
           <ul className={classes.ul}>
             <li className={classes.li}>
-              <Link to="/">Pagina inicial</Link>
+              <Link className={classes.navItem} to="/">
+                Pagina inicial
+              </Link>
             </li>
             <li className={classes.li}>
-              <Link to="/about">About</Link>
+              <Link className={classes.navItem} to="/avaliar">
+                Avaliar
+              </Link>
             </li>
             <li className={classes.li}>
-              <Link to="/users">Sobre</Link>
+              <Link className={classes.navItem} to="/sobre">
+                Sobre
+              </Link>
             </li>
           </ul>
-        </HFlow>
-      </header>
-      <Switch>
-        <div style={{ margin: "2rem auto", width: "90%" }}>
-          <Route path="/about">
-            <Sobre />
-          </Route>
-          <Route path="/users"></Route>
-          <Route path="/">
-            <ListaQuestoes />
-          </Route>
-        </div>
-      </Switch>
-    </Router>
+        </header>
+        <section className={classes.content}>
+          <Switch>
+            <Route path="/sobre">
+              <Sobre />
+            </Route>
+            <Route path="/avaliar">
+              <div></div>
+            </Route>
+            <Route path="/">
+              <ListaQuestoes />
+            </Route>
+          </Switch>
+        </section>
+
+        <footer className={classes.footer}>
+          <Text style={{ color: "white" }}>TCC - Wellington S.F . 2020</Text>
+        </footer>
+      </Router>
+    </>
   );
 }
 
 const createStyles = (theme: Theme) => ({
-  header: {
-    background: theme.pallete.surface.main,
-    padding: "1rem 2rem",
-    boxShadow: theme.shadows.outer[60],
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    zIndex: 20,
-    width: "100%"
-  } as CSSProperties,
-
   ul: {
     listStyleType: "none",
     margin: 0,
@@ -65,6 +67,52 @@ const createStyles = (theme: Theme) => ({
       textAlign: "center",
       padding: "14px 16px",
       textDecoration: "none"
+    }
+  } as CSSProperties,
+
+  content: {
+    margin: "2rem auto",
+    width: "90%",
+    minHeight: "77.6vh"
+  },
+
+  header: {
+    background: theme.pallete.surface.main,
+    padding: "1rem 0 1rem 0",
+    boxShadow: theme.shadows.outer[60],
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    zIndex: 20,
+    width: "100%"
+  } as CSSProperties,
+
+  footer: {
+    background: theme.pallete.primary.c30,
+    padding: "2rem",
+    gridRowStart: 2,
+    gridRowEnd: 3,
+    borderTop: "red",
+    boxShadow: "0 -5px 5px -5px #333"
+  } as CSSProperties,
+
+  navItem: {
+    ...theme.typography.variant("main"),
+    display: "inline-flex",
+    justifyContent: "center",
+    lineHeight: "1.5rem",
+    position: "relative",
+    userSelect: "none",
+    transition: "all .2s",
+    fontWeight: "bold",
+    fontSize: "2",
+    cursor: "pointer",
+    "& > span": {
+      alignItems: "center",
+      display: "inline-flex"
+    },
+    "&:hover": {
+      background: theme.pallete.gray.c80
     }
   } as CSSProperties
 });

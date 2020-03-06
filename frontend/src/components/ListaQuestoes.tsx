@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import { groupBy } from "lodash";
 import axios, { AxiosResponse } from "axios";
 import {
   Button,
@@ -7,12 +5,12 @@ import {
   HFlow,
   Radio,
   Text,
-  Grid,
-  VFlow,
-  Cell,
+  TextField,
   useTheme,
-  TextField
+  VFlow
 } from "bold-ui";
+import { groupBy } from "lodash";
+import React, { useState } from "react";
 
 type TipoQuestao = {
   id: number;
