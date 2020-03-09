@@ -57,7 +57,8 @@ const createStyles = (theme: Theme) => ({
     listStyleType: "none",
     margin: 0,
     padding: 0,
-    overflow: "hidden"
+    overflow: "hidden",
+    paddingLeft: '4rem'
   } as CSSProperties,
 
   li: {
@@ -71,7 +72,7 @@ const createStyles = (theme: Theme) => ({
   } as CSSProperties,
 
   content: {
-    margin: "2rem auto",
+    margin: "3rem auto",
     width: "90%",
     minHeight: "77.6vh"
   },
@@ -107,6 +108,7 @@ const createStyles = (theme: Theme) => ({
     fontWeight: "bold",
     fontSize: "2",
     cursor: "pointer",
+    borderRadius: 5,
     "& > span": {
       alignItems: "center",
       display: "inline-flex"
