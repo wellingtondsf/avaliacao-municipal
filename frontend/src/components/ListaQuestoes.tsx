@@ -24,30 +24,15 @@ type QuestaoItem = {
   pontos: number;
 };
 
-export const ListaQuestoes = () => {
-  const [questoes, setQuestoes] = useState<QuestaoItem[]>();
-  const theme = useTheme();
+type ListarQuestoesProps = {
+  questoes: QuestaoItem[];
+};
 
-  const handleScTransparenteClicked = () => {
-    axios
-      .get(`/api/questao/listarQuestoesByQuestionarioId?id=1`)
-      .then((response: AxiosResponse<QuestaoItem[]>) => {
-        setQuestoes(response.data);
-        console.log(groupBy(response.data, "nome"));
-      })
-      .catch(response => console.log("Ocorreu algum erro.", response));
-  };
+export const ListaQuestoes = (props: ListarQuestoesProps) => {
+  const { questoes } = props;
 
   return (
     <>
-      <HFlow>
-        <Button size="medium" onClick={handleScTransparenteClicked}>
-          Escala SC Transparente
-        </Button>
-      </HFlow>
-
-      <TextField label="CPF"></TextField>
-
       <VFlow>
         {questoes != null ? (
           questoes.map(questao => (

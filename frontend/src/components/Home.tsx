@@ -3,6 +3,7 @@ import React, { CSSProperties } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { ListaQuestoes } from "./ListaQuestoes";
 import { Sobre } from "./Sobre";
+import { Avaliar } from "./Avaliar";
 
 export function Home() {
   const { classes } = useStyles(createStyles);
@@ -36,10 +37,10 @@ export function Home() {
               <Sobre />
             </Route>
             <Route path="/avaliar">
-              <div></div>
+              <Avaliar />
             </Route>
             <Route path="/">
-              <ListaQuestoes />
+              <div></div>
             </Route>
           </Switch>
         </section>
@@ -58,7 +59,7 @@ const createStyles = (theme: Theme) => ({
     margin: 0,
     padding: 0,
     overflow: "hidden",
-    paddingLeft: '4rem'
+    paddingLeft: "4rem"
   } as CSSProperties,
 
   li: {
