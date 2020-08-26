@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import { Home } from "./components/Home";
+import { Navegacao } from "./components/Navegacao";
 
 const App = () => {
-  return <Home />;
+  return <Navegacao />;
 };
 
 export default App;

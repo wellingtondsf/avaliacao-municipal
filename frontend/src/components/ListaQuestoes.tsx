@@ -7,7 +7,7 @@ import {
   Text,
   TextField,
   useTheme,
-  VFlow
+  VFlow,
 } from "bold-ui";
 import { groupBy } from "lodash";
 import React, { useState } from "react";
@@ -25,7 +25,7 @@ type QuestaoItem = {
 };
 
 type ListarQuestoesProps = {
-  questoes: QuestaoItem[];
+  questoes: QuestaoItem[] | undefined;
 };
 
 export const ListaQuestoes = (props: ListarQuestoesProps) => {
@@ -35,13 +35,13 @@ export const ListaQuestoes = (props: ListarQuestoesProps) => {
     <>
       <VFlow>
         {questoes != null ? (
-          questoes.map(questao => (
+          questoes.map((questao) => (
             <HFlow style={{ marginTop: "1rem" }} key={questao.id}>
               <Heading
                 key={questao.id}
                 fontWeight="bold"
                 style={{
-                  marginLeft: "1rem"
+                  marginLeft: "1rem",
                 }}
                 level={3}
               >
