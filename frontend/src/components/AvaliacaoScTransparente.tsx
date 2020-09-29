@@ -37,8 +37,6 @@ export const AvaliacaoScTransparente = () => {
     });
   }
 
-  console.log(questoes[0])
-
   // "QUESTAO": [ ]
   return questoes ? (
     <>

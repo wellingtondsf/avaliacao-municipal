@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+
+  database:
+    container_name: avaliacao-municipal
+    image: postgres:9.6-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: avaliacao-municipal
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
