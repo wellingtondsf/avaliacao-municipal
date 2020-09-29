@@ -65,7 +65,7 @@ const createStyles = (theme: Theme) => ({
 
   content: {
     margin: "3rem auto",
-    width: "90%",
+    width: "80%",
     minHeight: "77.6vh",
   },
 
@@ -83,9 +83,7 @@ const createStyles = (theme: Theme) => ({
   footer: {
     background: theme.pallete.primary.c30,
     padding: "2rem",
-    gridRowStart: 2,
-    gridRowEnd: 3,
-    borderTop: "red",
+    bottom: '0',
     boxShadow: "0 -5px 5px -5px #333",
   } as CSSProperties,
 

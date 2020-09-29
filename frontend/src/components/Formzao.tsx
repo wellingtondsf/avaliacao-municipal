@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import { Dictionary } from "lodash";
 import { QuestaoItem } from "./Avaliar";
+import { Checkbox, Radio, HFlow } from "bold-ui";
 
 export interface FormzaoProps {
   questoes: Dictionary<QuestaoItem[]>;
@@ -24,12 +25,18 @@ export function Formzao(props: FormzaoProps) {
               return (
                 <div>
                   <label>{questaoItem.nome}</label>
-                  <input
-                    name={`${key}[${idx}].resposta`}
-                    type="checkbox"
-                    checked={formik.values[key][idx].resposta}
-                    onChange={formik.handleChange}
-                  ></input>
+       
+                  <HFlow>
+                  <Radio label="Sim"
+                  name={`${key}[${idx}].resposta`}
+                  onChange={ () => {formik.values[key][idx].resposta = true}}
+                  value="1"/>
+                  <Radio label="Sim"
+                  name={`${key}[${idx}].resposta`}
+                  onChange={() => {formik.values[key][idx].resposta = false}}
+                  value="2"/>
+                  </HFlow>
+
                 </div>
               );
             })}

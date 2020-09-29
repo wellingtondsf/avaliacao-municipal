@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import { Formzao } from "./Formzao";
 
 export const AvaliacaoScTransparente = () => {
-  const [questoes, setQuestoes] = useState<Dictionary<QuestaoItem[]>>();
+  const [questoes, setQuestoes] = useState<Dictionary<QuestaoItem[]>>({});
   const { getStepProps, nextStep, previousStep, currentStep } = useStepperState(
     0
   );
@@ -20,7 +20,7 @@ export const AvaliacaoScTransparente = () => {
           groupBy(
             response.data.map((questaoItem) => ({
               ...questaoItem,
-              resposta: true,
+              resposta: false,
             })),
             "tipoQuestao.nome"
           )
@@ -28,7 +28,7 @@ export const AvaliacaoScTransparente = () => {
       })
       .catch((response) => console.log("Ocorreu algum erro.", response));
   }, []);
-
+  
   const listaQuestoes: ReactElement[] = [];
 
   if (questoes) {
@@ -36,6 +36,8 @@ export const AvaliacaoScTransparente = () => {
       listaQuestoes[index] = <ListaQuestoes questoes={value} />;
     });
   }
+
+  console.log(questoes[0])
 
   // "QUESTAO": [ ]
   return questoes ? (
