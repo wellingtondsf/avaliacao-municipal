@@ -5,6 +5,8 @@ services:
   database:
     container_name: avaliacao-municipal
     image: postgres:9.6-alpine
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
     environment:

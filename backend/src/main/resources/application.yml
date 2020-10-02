@@ -1,26 +1,27 @@
 spring:
-  application:
-    name: avaliacao-municipal
-  datasource:
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/avaliacao-municipal
-    initialization-mode: always
-  jpa:
-    properties:
-      generate-ddl: true
-      hibernate:
-        jdbc:
-          batch_size: 100
-        order_inserts: true
-        ddl-auto: update
+    application:
+        name: avaliacao-municipal
+    datasource:
+        username: postgres
+        password: postgres
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://localhost/avaliacao-municipal?reWriteBatchedInserts=true
+        initialization-mode: always
+    jpa:
+        generate-ddl: true
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+            hibernate:
+                jdbc:
+                    batch_size: 100
+                order_inserts: true
 ---
 spring:
-  profiles: dev
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        generate_statistics: true
+    profiles: dev
+    jpa:
+        show-sql: true
+        properties:
+            hibernate:
+                generate_statistics: true
 ---
