@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,8 +63,9 @@ public class QuestionarioRespondidoController {
 		}
 	}
 
-	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional
+	@CrossOrigin
 	public ResponseEntity<String> inserirQuestionarioRespondido(@RequestBody QuestionarioRespondidoDTO questionarioRespondidoDTO) {
 		QuestionarioRespondido questionarioRespondido = new QuestionarioRespondido();
 		questionarioRespondido.setDataResposta(LocalDate.now());

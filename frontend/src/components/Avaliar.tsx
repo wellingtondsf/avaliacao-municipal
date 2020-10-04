@@ -1,13 +1,7 @@
+import { Button, Heading, HFlow, Text, VFlow } from "bold-ui";
 import React from "react";
-import { HFlow, Text, Button, Heading, VFlow } from "bold-ui";
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-  useRouteMatch,
-} from "react-router-dom";
-import { AvaliacaoScTransparente } from "./AvaliacaoScTransparente";
+import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
+import { AvaliacaoScTransparenteRootView } from "./AvaliacaoScTransparenteRootView";
 
 export type TipoQuestao = {
   id: number;
@@ -19,7 +13,7 @@ export type QuestaoItem = {
   tipoQuestao: TipoQuestao;
   nome: string;
   pontos: number;
-  resposta: boolean;
+  resposta: boolean | "";
 };
 
 export const Avaliar = () => {
@@ -86,7 +80,7 @@ export const Avaliar = () => {
         <Route
           path={`${path}/sc-transparente`}
           exact
-          component={AvaliacaoScTransparente}
+          component={AvaliacaoScTransparenteRootView}
         />
       </Switch>
     </>
