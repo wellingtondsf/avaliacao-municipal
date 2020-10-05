@@ -33,7 +33,7 @@ public class QuestionarioRespondido {
 	@JoinColumn(name = "CO_MUNICIPIO")
 	private Municipio municipio;
 
-	@Column(name = "NU_CPF", length = 11, updatable = false, nullable = false)
+	@Column(name = "NU_CPF", length = 14, updatable = false, nullable = false)
 	private String nuCpf;
 
 	@Column(name = "DT_RESPOSTA")

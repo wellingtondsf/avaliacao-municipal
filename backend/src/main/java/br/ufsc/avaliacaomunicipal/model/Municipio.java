@@ -1,9 +1,14 @@
 package br.ufsc.avaliacaomunicipal.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.*;
 
 @Entity
 @Getter
@@ -11,15 +16,14 @@ import javax.persistence.*;
 @Table(name = "TB_MUNICIPIO")
 public class Municipio {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CO_SEQ_MUNICIPIO",updatable = false, nullable = false)
-    private Long id;
+	@Id
+	@Column(name = "CO_SEQ_MUNICIPIO", updatable = false, nullable = false)
+	private Long id;
 
-    @Column(name = "NO_MUNICIPIO")
-    private String nome;
+	@Column(name = "NO_MUNICIPIO")
+	private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "CO_ESTADO")
-    private Estado estado;
+	@ManyToOne
+	@JoinColumn(name = "CO_ESTADO")
+	private Estado estado;
 }

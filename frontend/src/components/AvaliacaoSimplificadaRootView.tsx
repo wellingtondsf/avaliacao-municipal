@@ -7,7 +7,7 @@ import { QuestionarioRespondido } from "../model/QuestionarioRespondido";
 import { useAlert } from "./alert";
 import { useHistory } from "react-router-dom";
 
-export const AvaliacaoScTransparenteRootView = () => {
+export const AvaliacaoSimplificadaRootView = () => {
   const [questoes, setQuestoes] = useState<Dictionary<QuestaoItem[]>>();
 
   const alert = useAlert();
@@ -26,7 +26,7 @@ export const AvaliacaoScTransparenteRootView = () => {
 
   useEffect(() => {
     axios
-      .get(`/api/questao/listarQuestoesByQuestionarioId?id=1`)
+      .get(`/api/questao/listarQuestoesByQuestionarioId?id=2`)
       .then((response: AxiosResponse<QuestaoItem[]>) => {
         setQuestoes(
           groupBy(
@@ -44,7 +44,7 @@ export const AvaliacaoScTransparenteRootView = () => {
   return questoes ? (
     <AvaliacaoScTransparente
       questoes={questoes}
-      questionarioId={1}
+      questionarioId={2}
       handleSubmit={handleSubmit}
     />
   ) : (

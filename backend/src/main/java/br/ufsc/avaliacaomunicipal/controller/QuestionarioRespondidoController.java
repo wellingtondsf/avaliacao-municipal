@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +30,7 @@ import br.ufsc.avaliacaomunicipal.model.Questao;
 import br.ufsc.avaliacaomunicipal.model.Questionario;
 import br.ufsc.avaliacaomunicipal.model.QuestionarioRespondido;
 import br.ufsc.avaliacaomunicipal.model.Resposta;
+import br.ufsc.avaliacaomunicipal.repository.EstadoRepository;
 import br.ufsc.avaliacaomunicipal.repository.MunicipioRepository;
 import br.ufsc.avaliacaomunicipal.repository.QuestaoRepository;
 import br.ufsc.avaliacaomunicipal.repository.QuestionarioRepository;
@@ -45,6 +46,7 @@ public class QuestionarioRespondidoController {
 	private final QuestionarioRespondidoRepository repository;
 	private final QuestionarioRepository questionarioRepository;
 	private final MunicipioRepository municipioRepository;
+	private final EstadoRepository estadoRepository;
 	private final QuestaoRepository questaoRepository;
 	private final RespostaRepository respostaRepository;
 	private Map<Long, Questao> questaoMapping;
@@ -63,7 +65,7 @@ public class QuestionarioRespondidoController {
 		}
 	}
 
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional
 	@CrossOrigin
 	public ResponseEntity<String> inserirQuestionarioRespondido(@RequestBody QuestionarioRespondidoDTO questionarioRespondidoDTO) {
@@ -71,8 +73,12 @@ public class QuestionarioRespondidoController {
 		questionarioRespondido.setDataResposta(LocalDate.now());
 		questionarioRespondido.setNuCpf(questionarioRespondidoDTO.getNuCpf());
 
-		Municipio municipio = this.municipioRepository.findById(questionarioRespondidoDTO.getMunicipioId())
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Municipio não encontrado"));
+		if (!this.estadoRepository.findById(questionarioRespondidoDTO.getMunicipio().getEstado().getId()).isPresent()) {
+			this.estadoRepository.save(questionarioRespondidoDTO.getMunicipio().getEstado());
+		}
+
+		Municipio municipio = this.municipioRepository.findById(questionarioRespondidoDTO.getMunicipio().getId())
+				.orElse(this.municipioRepository.save(questionarioRespondidoDTO.getMunicipio()));
 
 		questionarioRespondido.setMunicipio(municipio);
 

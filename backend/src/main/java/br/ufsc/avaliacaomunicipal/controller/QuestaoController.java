@@ -1,7 +1,6 @@
 package br.ufsc.avaliacaomunicipal.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufsc.avaliacaomunicipal.dto.QuestionarioRespondidoDTO;
-import br.ufsc.avaliacaomunicipal.dto.RespostaDTO;
 import br.ufsc.avaliacaomunicipal.model.Questao;
 import br.ufsc.avaliacaomunicipal.repository.QuestaoRepository;
 import br.ufsc.avaliacaomunicipal.repository.QuestionarioRepository;
@@ -46,12 +43,4 @@ public class QuestaoController {
 		return ResponseEntity.ok().build();
 	}
 
-	@GetMapping(value = "mock")
-	public ResponseEntity<QuestionarioRespondidoDTO> getMock() {
-		List<RespostaDTO> respostas = this.repository.findAllByQuestionarioId(1L)
-				.stream()
-				.map((questao -> new RespostaDTO(questao.getId(), true)))
-				.collect(Collectors.toList());
-		return ResponseEntity.ok(new QuestionarioRespondidoDTO(1L, 1L, "08598551988", respostas));
-	}
 }

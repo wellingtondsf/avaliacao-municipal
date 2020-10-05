@@ -1,4 +1,4 @@
-import { Cell, Grid, Heading, Link, Text, VFlow, DataTable } from "bold-ui";
+import { Cell, Grid, Heading, Link, Text, VFlow } from "bold-ui";
 import React from "react";
 
 export const Sobre = () => {

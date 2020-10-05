@@ -2,6 +2,7 @@ import { Button, Heading, HFlow, Text, VFlow } from "bold-ui";
 import React from "react";
 import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
 import { AvaliacaoScTransparenteRootView } from "./AvaliacaoScTransparenteRootView";
+import { AvaliacaoSimplificadaRootView } from "./AvaliacaoSimplificadaRootView";
 
 export type TipoQuestao = {
   id: number;
@@ -81,6 +82,11 @@ export const Avaliar = () => {
           path={`${path}/sc-transparente`}
           exact
           component={AvaliacaoScTransparenteRootView}
+        />
+        <Route
+          path={`${path}/simplificada`}
+          exact
+          component={AvaliacaoSimplificadaRootView}
         />
       </Switch>
     </>
