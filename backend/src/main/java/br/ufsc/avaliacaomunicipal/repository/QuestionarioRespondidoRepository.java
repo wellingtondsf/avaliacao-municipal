@@ -1,6 +1,5 @@
 package br.ufsc.avaliacaomunicipal.repository;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,6 +21,6 @@ public interface QuestionarioRespondidoRepository extends JpaRepository<Question
 					+ " on respondido.co_municipio = questionarios_respondidos.co_municipio"
 					+ " where resposta.resposta = true and respondido.co_municipio = ?1"
 					+ " group by questao.co_tp_questao, tipo.no_tp_questao, questionarios_respondidos.qt", nativeQuery = true)
-	Collection<GraficoMediaRespostasDTO> findMediaRespostasByMunicipioId(Long municipioId);
+	List<GraficoMediaRespostasDTO> findMediaRespostasByMunicipioId(Long municipioId);
 
 }

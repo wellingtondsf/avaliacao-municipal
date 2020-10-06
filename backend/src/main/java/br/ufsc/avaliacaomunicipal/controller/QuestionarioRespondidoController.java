@@ -1,7 +1,6 @@
 package br.ufsc.avaliacaomunicipal.controller;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -103,7 +102,7 @@ public class QuestionarioRespondidoController {
 	}
 
 	@GetMapping(value = "/findMediaRespostasByMunicipioId", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<GraficoMediaRespostasDTO>> findMediaRespostasByMunicipioId(@RequestParam(required = true) Long municipioId) {
+	public ResponseEntity<List<GraficoMediaRespostasDTO>> findMediaRespostasByMunicipioId(@RequestParam(required = true) Long municipioId) {
 		return ResponseEntity.ok(this.repository.findMediaRespostasByMunicipioId(municipioId));
 	}
 }
