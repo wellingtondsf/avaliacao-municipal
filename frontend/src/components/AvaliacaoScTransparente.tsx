@@ -95,6 +95,8 @@ export const AvaliacaoScTransparente = (
     const errorList = validate();
     if (errorList.length === 0) {
       nextStep();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
     } else {
       setErrorList(errorList);
     }

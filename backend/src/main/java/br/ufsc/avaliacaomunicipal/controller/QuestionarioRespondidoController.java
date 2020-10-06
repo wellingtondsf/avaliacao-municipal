@@ -1,6 +1,7 @@
 package br.ufsc.avaliacaomunicipal.controller;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.ufsc.avaliacaomunicipal.dto.GraficoMediaRespostasDTO;
 import br.ufsc.avaliacaomunicipal.dto.QuestionarioRespondidoDTO;
 import br.ufsc.avaliacaomunicipal.model.Municipio;
 import br.ufsc.avaliacaomunicipal.model.Questao;
@@ -100,4 +102,8 @@ public class QuestionarioRespondidoController {
 		return ResponseEntity.ok("OK");
 	}
 
+	@GetMapping(value = "/findMediaRespostasByMunicipioId", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<GraficoMediaRespostasDTO>> findMediaRespostasByMunicipioId(@RequestParam(required = true) Long municipioId) {
+		return ResponseEntity.ok(this.repository.findMediaRespostasByMunicipioId(municipioId));
+	}
 }
