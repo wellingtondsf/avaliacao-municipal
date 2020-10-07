@@ -105,4 +105,9 @@ public class QuestionarioRespondidoController {
 	public ResponseEntity<List<GraficoMediaRespostasDTO>> findMediaRespostasByMunicipioId(@RequestParam(required = true) Long municipioId) {
 		return ResponseEntity.ok(this.repository.findMediaRespostasByMunicipioId(municipioId));
 	}
+
+	@GetMapping(value = "/findMediaRespostasSimplificadaByMunicipioId", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<GraficoMediaRespostasDTO>> findMediaRespostasSimplificadoByMunicipioId(@RequestParam(required = true) Long municipioId) {
+		return ResponseEntity.ok(this.repository.findMediaRespostasSimplificadaByMunicipioId(municipioId));
+	}
 }

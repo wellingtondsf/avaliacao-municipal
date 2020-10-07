@@ -1,31 +1,82 @@
-import { Theme, useStyles, Text } from "bold-ui";
-import React, { CSSProperties } from "react";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import {
+  Theme,
+  useStyles,
+  Text,
+  Dropdown,
+  Button,
+  DropdownItem,
+  ButtonProps,
+} from "bold-ui";
+import React, { CSSProperties, useState, useRef } from "react";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import { Sobre } from "./Sobre";
 import { Avaliar } from "./Avaliar";
+import { Relatorio } from "./Relatorio";
 import { Home } from "./Home";
+import { CompararMunicipio } from "./CompararMunicipio";
+
+export interface CustonLinkProsp extends ButtonProps {
+  link: string;
+  label: string
+}
+
+export function CustomLink(props: CustonLinkProsp) {
+  const history = useHistory();
+  const { onClick, ...rest } = props;
+  return (
+    <Button {...rest} onClick={() => history.push(props.link)} style={{"&:focus": {outline: 'none', boxShadow: 'none'}}}>
+      {props.label}
+    </Button>
+  );
+}
 
 export function Navegacao() {
   const { classes } = useStyles(createStyles);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
 
   return (
     <Router>
       <header className={classes.header}>
         <ul className={classes.ul}>
           <li className={classes.li}>
-            <Link className={classes.navItem} to="/">
-              Pagina inicial
-            </Link>
+            <CustomLink size="medium" style={classes.navItem} skin="ghost" link='/' label='Pagina inicial'/>
+ 
           </li>
           <li className={classes.li}>
-            <Link className={classes.navItem} to="/avaliar">
-              Avaliar
-            </Link>
+            <Button
+              innerRef={buttonRef}
+              size="medium"
+              style={classes.navItem }
+              skin="ghost"
+              onClick={() => setOpen((state) => !state)}
+            >
+              Municipio
+            </Button>
+            <Dropdown
+              anchorRef={buttonRef.current}
+              open={open}
+              onClose={() => setOpen(false)}
+            >
+              <DropdownItem component="a" href="/avaliar">
+                Avaliar
+              </DropdownItem>
+              <DropdownItem component="a" href="/comparar">
+                Comparar
+              </DropdownItem>
+              <DropdownItem component="a" href="/relatorio">
+                Relatório
+              </DropdownItem>
+            </Dropdown>
           </li>
           <li className={classes.li}>
-            <Link className={classes.navItem} to="/sobre">
-              Sobre
-            </Link>
+          <CustomLink size="medium" style={classes.navItem} skin="ghost" link='/sobre' label='Sobre'/>
           </li>
         </ul>
       </header>
@@ -33,6 +84,8 @@ export function Navegacao() {
         <Switch>
           <Route path="/sobre" component={Sobre} />
           <Route path="/avaliar" component={Avaliar} />
+          <Route path="/relatorio" component={Relatorio} />
+          <Route path="/comparar" component={CompararMunicipio} />
           <Route path="/" component={Home} />
         </Switch>
       </section>
@@ -83,7 +136,7 @@ const createStyles = (theme: Theme) => ({
   footer: {
     background: theme.pallete.primary.c30,
     padding: "2rem",
-    bottom: '0',
+    bottom: "0",
     boxShadow: "0 -5px 5px -5px #333",
   } as CSSProperties,
 
@@ -106,5 +159,6 @@ const createStyles = (theme: Theme) => ({
     "&:hover": {
       background: theme.pallete.gray.c80,
     },
+    "&:focus": {outline: 'none', boxShadow: 'none'}
   } as CSSProperties,
 });
