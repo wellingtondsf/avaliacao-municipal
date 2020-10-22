@@ -106,10 +106,10 @@ export const AvaliacaoScTransparente = (
     const estadoSelecionado = estado as Estado;
     setEstadoSelecionado(estadoSelecionado);
 
-    estadoSelecionado?.sigla &&
+    estadoSelecionado?.id &&
       axios
         .get(
-          `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estadoSelecionado.sigla}/municipios`
+          `/api/municipio/findMunicipiosByUf?ufId=${estadoSelecionado.id}`
         )
         .then((response: AxiosResponse<Municipio[]>) =>
           setMunicipios(response.data)
@@ -207,6 +207,7 @@ export const AvaliacaoScTransparente = (
                 inputRef={ref}
                 {...props}
                 error={errorList.includes("nuCpf") && "Favor preencher o CPF"}
+                clearable = {false}
               />
             )}
           />
@@ -219,10 +220,11 @@ export const AvaliacaoScTransparente = (
             value={estadoSelecionado}
             error={errorList.includes("estado") && "Favor preencher o Estado"}
             style={{ width: "20rem" }}
+            clearable = {false}
           />
           <Tooltip
             text={!estadoSelecionado ? "Primeiro preencha o Estado" : ""}
-            placement="auto"
+            placement="auto-start"
             offset={7}
           >
             <Select<Municipio>
@@ -235,6 +237,7 @@ export const AvaliacaoScTransparente = (
               onChange={handleMunicipioSelect}
               style={{ width: "20rem" }}
               disabled={!estadoSelecionado}
+              clearable = {false}
               error={
                 errorList.includes("municipio") && "Favor preencher o Município"
               }

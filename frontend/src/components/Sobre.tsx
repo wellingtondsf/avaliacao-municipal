@@ -73,9 +73,9 @@ export const Sobre = () => {
         <Cell xs={5}></Cell>
 
         <Cell xs={6}>
-          <Heading level={2}>Escala Simplificada</Heading>
+          <Heading level={2}>Avaliação cidadã de transparência municipal</Heading>
           <Text fontSize={1}>
-            A escala simplificada foi desenvolvida tendo como base a Escala
+            A Avaliação cidadã de transparência municipal foi desenvolvida tendo como base a Escala
             Santa Catarina Transparente, ela é como o nome diz, uma versão mais
             simples, onde remove questões de conhecimentos mais especificos,
             diminuindo consideravelmente a quantidade de questões totais do

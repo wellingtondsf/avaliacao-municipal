@@ -58,10 +58,10 @@ export const Avaliar = () => {
             <Link to={`${url}/simplificada`} role="button">
               <VFlow>
                 <Text fontWeight="bold" fontSize={1}>
-                  Escala Simplificada
+                Avaliação cidadã de transparência municipal
                 </Text>
                 <Text>
-                  A Escala Simplificada possui um conteudo mais enxuto e
+                  A Avaliação cidadã de transparência municipal possui um conteudo mais enxuto e
                   simples, removendo itens e questões que necessitam um
                   conhecimento mais tecnico ou conhecimento previo sobre como a
                   Lei de Acesso a Informação funciona.

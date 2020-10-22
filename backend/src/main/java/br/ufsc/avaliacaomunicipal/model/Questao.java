@@ -36,4 +36,7 @@ public class Questao {
 	@ManyToOne
 	@JoinColumn(name = "CO_QUESTIONARIO")
 	private Questionario questionario;
+
+	@Column(name = "DS_QUESTAO", length = 1000)
+	private String descricao;
 }

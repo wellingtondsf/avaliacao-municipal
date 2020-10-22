@@ -26,4 +26,7 @@ public class Municipio {
 	@ManyToOne
 	@JoinColumn(name = "CO_ESTADO")
 	private Estado estado;
+
+	@Column(name = "NUM_POP")
+	private Long populacao;
 }
