@@ -2,7 +2,7 @@ import { Button, Heading, HFlow, Text, VFlow } from "bold-ui";
 import React from "react";
 import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
 import { AvaliacaoScTransparenteRootView } from "./AvaliacaoScTransparenteRootView";
-import { AvaliacaoSimplificadaRootView } from "./AvaliacaoSimplificadaRootView";
+import { AvaliacaoCidadaTransparenciaMunicipalRootView } from "./AvaliacaoCidadaTrasparenciaMunicipalRootView";
 
 export type TipoQuestao = {
   id: number;
@@ -55,7 +55,7 @@ export const Avaliar = () => {
           </Button>
 
           <Button>
-            <Link to={`${url}/simplificada`} role="button">
+            <Link to={`${url}/cidada-transparencia-municipal`} role="button">
               <VFlow>
                 <Text fontWeight="bold" fontSize={1}>
                 Avaliação cidadã de transparência municipal
@@ -84,9 +84,9 @@ export const Avaliar = () => {
           component={AvaliacaoScTransparenteRootView}
         />
         <Route
-          path={`${path}/simplificada`}
+          path={`${path}/cidada-transparencia-municipal`}
           exact
-          component={AvaliacaoSimplificadaRootView}
+          component={AvaliacaoCidadaTransparenciaMunicipalRootView}
         />
       </Switch>
     </>

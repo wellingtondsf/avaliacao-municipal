@@ -25,14 +25,14 @@ import {
 import { Resposta } from "../model/Resposta";
 import { QuestaoItem } from "./Avaliar";
 
-export interface AvaliacaoScTransparenteProps {
+export interface QuestoesAvaliacaoProps {
   questoes: Dictionary<QuestaoItem[]>;
   questionarioId: number;
   handleSubmit: (value: QuestionarioRespondido) => void;
 }
 
-export const AvaliacaoScTransparente = (
-  props: AvaliacaoScTransparenteProps
+export const QuestoesAvaliacao = (
+  props: QuestoesAvaliacaoProps
 ) => {
   const { questoes, questionarioId, handleSubmit } = props;
 

@@ -1,13 +1,13 @@
 import axios, { AxiosResponse } from "axios";
 import { Dictionary, groupBy } from "lodash";
 import React, { useEffect, useState } from "react";
-import { AvaliacaoScTransparente } from "./AvaliacaoScTransparente";
+import { QuestoesAvaliacao } from "./QuestoesAvaliacao";
 import { QuestaoItem } from "./Avaliar";
 import { QuestionarioRespondido } from "../model/QuestionarioRespondido";
 import { useAlert } from "./alert";
 import { useHistory } from "react-router-dom";
 
-export const AvaliacaoSimplificadaRootView = () => {
+export const AvaliacaoCidadaTransparenciaMunicipalRootView = () => {
   const [questoes, setQuestoes] = useState<Dictionary<QuestaoItem[]>>();
 
   const alert = useAlert();
@@ -42,7 +42,7 @@ export const AvaliacaoSimplificadaRootView = () => {
   }, []);
 
   return questoes ? (
-    <AvaliacaoScTransparente
+    <QuestoesAvaliacao
       questoes={questoes}
       questionarioId={2}
       handleSubmit={handleSubmit}

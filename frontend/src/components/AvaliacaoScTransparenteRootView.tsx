@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { Dictionary, groupBy } from "lodash";
 import React, { useEffect, useState } from "react";
-import { AvaliacaoScTransparente } from "./AvaliacaoScTransparente";
+import { QuestoesAvaliacao } from "./QuestoesAvaliacao";
 import { QuestaoItem } from "./Avaliar";
 import { QuestionarioRespondido } from "../model/QuestionarioRespondido";
 import { useAlert } from "./alert";
@@ -42,7 +42,7 @@ export const AvaliacaoScTransparenteRootView = () => {
   }, []);
 
   return questoes ? (
-    <AvaliacaoScTransparente
+    <QuestoesAvaliacao
       questoes={questoes}
       questionarioId={1}
       handleSubmit={handleSubmit}

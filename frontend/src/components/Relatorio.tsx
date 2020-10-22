@@ -25,8 +25,8 @@ export const Relatorio = () => {
   >([]);
 
   const [
-    mediaNotasMunicipioSimplificada,
-    setMediaNotasMunicipioSimplificada,
+    mediaNotasMunicipioAvaliacao,
+    setMediaNotasMunicipioAvaliacao,
   ] = useState<BarItemProps[]>([]);
 
   const handleEstadoSelect = (estado: Estado | Estado[]) => {
@@ -76,7 +76,7 @@ export const Relatorio = () => {
           `/api/questionario-respondido/findMediaRespostasSimplificadaByMunicipioId?municipioId=${municipioSelecionado?.id}`
         )
         .then((response: AxiosResponse<BarItemProps[]>) => {
-          setMediaNotasMunicipioSimplificada(response.data);
+          setMediaNotasMunicipioAvaliacao(response.data);
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
     }
@@ -157,7 +157,7 @@ export const Relatorio = () => {
         borderWidth: 0,
       },
     },
-    series: mediaNotasMunicipioSimplificada.map(
+    series: mediaNotasMunicipioAvaliacao.map(
       (municipio) =>
         ({
           name: municipio.item,
@@ -179,6 +179,7 @@ export const Relatorio = () => {
         value={estadoSelecionado}
         style={{ width: "20rem" }}
         clearable={false}
+        autoComplete="off"
       />
       <Tooltip
         text={!estadoSelecionado ? "Primeiro preencha o Estado" : ""}
@@ -195,6 +196,7 @@ export const Relatorio = () => {
           disabled={!estadoSelecionado}
           onClear={() => setMunicipioSelecionado(undefined)}
           clearable={false}
+          autoComplete="off"
         />
       </Tooltip>
       {mediaNotasMunicipio.length > 0 && municipioSelecionado && (
@@ -202,7 +204,7 @@ export const Relatorio = () => {
           <HighchartsReact highcharts={Highcharts} options={options} />
         </Paper>
       )}
-      {mediaNotasMunicipioSimplificada.length > 0 && municipioSelecionado && (
+      {mediaNotasMunicipioAvaliacao.length > 0 && municipioSelecionado && (
         <Paper>
           <HighchartsReact highcharts={Highcharts} options={optionsAvaliacao} />
         </Paper>

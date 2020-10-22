@@ -1,11 +1,12 @@
-import { Cell, Grid, Heading, Link, Text, VFlow } from "bold-ui";
+import { Cell, Grid, Heading, Link, Text, VFlow, HFlow } from "bold-ui";
 import React from "react";
 
 export const Sobre = () => {
   return (
     <VFlow>
+      <HFlow justifyContent="center">
       <Heading level={1}>Sobre a Avaliação Municipal</Heading>
-
+      </HFlow>
       <Grid gapVertical={10}>
         <Cell xs={6}>
           <Heading level={2}>Plataforma</Heading>
