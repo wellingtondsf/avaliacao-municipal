@@ -2,7 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Estado } from "../model/Estado";
 import { Municipio } from "../model/Municipio";
 import axios, { AxiosResponse } from "axios";
-import { HFlow, Select, Tooltip, VFlow, Paper } from "bold-ui";
+import {
+  HFlow,
+  Select,
+  Tooltip,
+  VFlow,
+  Paper,
+  Cell,
+  Grid,
+  Heading,
+} from "bold-ui";
 import { BarItemProps } from "./Relatorio";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
@@ -23,6 +32,11 @@ export const CompararMunicipio = () => {
     Estado
   >();
 
+  const [
+    municipioSelecionadoComparado,
+    setMunicipioSelecionadoComparado,
+  ] = useState<Municipio>();
+
   const [mediaNotasMunicipioBase, setMediaNotasMunicipioBase] = useState<
     BarItemProps[]
   >([]);
@@ -33,9 +47,14 @@ export const CompararMunicipio = () => {
   ] = useState<BarItemProps[]>([]);
 
   const [
-    municipioSelecionadoComparado,
-    setMunicipioSelecionadoComparado,
-  ] = useState<Municipio>();
+    mediaNotasAvaliacaoMunicipioBase,
+    setMediaNotasAvaliacaoMunicipioBase,
+  ] = useState<BarItemProps[]>([]);
+
+  const [
+    mediaNotasAvaliacaoMunicipioComparado,
+    setMediaNotasAvaliacaoMunicipioComparado,
+  ] = useState<BarItemProps[]>([]);
 
   const handleEstadoSelectBase = (estado: Estado | Estado[]) => {
     const estadoSelecionado = estado as Estado;
@@ -113,6 +132,24 @@ export const CompararMunicipio = () => {
           );
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
+
+      axios
+        .get(
+          `/api/questionario-respondido/findMediaRespostasSimplificadaByMunicipioId?municipioId=${municipioSelecionadoBase?.id}`
+        )
+        .then((response: AxiosResponse<BarItemProps[]>) => {
+          setMediaNotasAvaliacaoMunicipioBase(response.data);
+        })
+        .catch((response) => console.log("Ocorreu algum erro.", response));
+
+      axios
+        .get(
+          `/api/questionario-respondido/findMediaRespostasSimplificadaByMunicipioId?municipioId=${municipioSelecionadoComparado?.id}`
+        )
+        .then((response: AxiosResponse<BarItemProps[]>) => {
+          setMediaNotasAvaliacaoMunicipioComparado(response.data);
+        })
+        .catch((response) => console.log("Ocorreu algum erro.", response));
     }
   }, [municipioSelecionadoBase, municipioSelecionadoComparado]);
 
@@ -125,13 +162,11 @@ export const CompararMunicipio = () => {
         type: "line",
       },
       title: {
-        text: `${municipioSelecionadoBase?.nome} X ${municipioSelecionadoComparado?.nome}`,
-        x: -80,
+        text: "Escala SC Transparente",
       },
       subtitle: {
         text:
-          "Comparação entre a media das notas dos dois municípios para a Escala SC Transparente",
-        x: -80,
+          "Comparação entre a média das notas dos dois municípios para a Escala SC Transparente",
       },
 
       pane: {
@@ -182,9 +217,80 @@ export const CompararMunicipio = () => {
       ],
     };
 
+  const optionsAvaliacao: Highcharts.Options = mediaNotasMunicipioBase &&
+    mediaNotasMunicipioComparado && {
+      chart: {
+        polar: true,
+        type: "line",
+      },
+      title: {
+        text: "Avaliação cidadã de transparência municipal",
+      },
+      subtitle: {
+        text:
+          "Comparação entre a média das notas dos dois municípios para a Avaliação cidadã de transparência municipal",
+      },
+
+      pane: {
+        size: "80%",
+      },
+
+      xAxis: {
+        categories: mediaNotasAvaliacaoMunicipioBase.map(
+          (municipio) => municipio.item
+        ),
+        tickmarkPlacement: "on",
+        lineWidth: 0,
+      },
+
+      yAxis: {
+        gridLineInterpolation: "polygon",
+        min: 0,
+        max: 10,
+        lineWidth: 0,
+      },
+
+      tooltip: {
+        shared: true,
+        pointFormat:
+          '<span style="color:{series.color}"><b>{series.name}<b/>: <b>Nota {point.y:,.0f}</b><br/>',
+        useHTML: true,
+      },
+
+      legend: {
+        align: "right",
+        verticalAlign: "middle",
+        layout: "vertical",
+      },
+
+      series: [
+        {
+          name: municipioSelecionadoBase?.nome,
+          data: mediaNotasAvaliacaoMunicipioBase.map(
+            (municicipio) => municicipio.media
+          ),
+          pointPlacement: "on",
+          type: "line",
+        },
+        {
+          name: municipioSelecionadoComparado?.nome,
+          data: mediaNotasAvaliacaoMunicipioComparado.map(
+            (municicipio) => municicipio.media
+          ),
+          pointPlacement: "on",
+          type: "line",
+        },
+      ],
+    };
+
   return (
-    <VFlow>
-      <HFlow>
+    <VFlow vSpacing={3}>
+       <HFlow justifyContent="center">
+      <Heading color="normal" level={1} >
+        Comparar Municípios
+      </Heading>
+      </HFlow>
+      <HFlow justifyContent="center" hSpacing={8}>
         <VFlow>
           <Select<Estado>
             label="Estado"
@@ -195,6 +301,7 @@ export const CompararMunicipio = () => {
             value={estadoSelecionadoBase}
             style={{ width: "20rem" }}
             clearable={false}
+            autoComplete="off"
           />
           <Tooltip
             text={!estadoSelecionadoBase ? "Primeiro preencha o Estado" : ""}
@@ -214,6 +321,7 @@ export const CompararMunicipio = () => {
               disabled={!estadoSelecionadoBase}
               onClear={() => setMunicipioSelecionadoBase(undefined)}
               clearable={false}
+              autoComplete="off"
             />
           </Tooltip>
         </VFlow>
@@ -228,6 +336,7 @@ export const CompararMunicipio = () => {
             value={estadoSelecionadoComparado}
             clearable={false}
             style={{ width: "20rem" }}
+            autoComplete="off"
           />
           <Tooltip
             text={
@@ -249,18 +358,38 @@ export const CompararMunicipio = () => {
               disabled={!estadoSelecionadoComparado}
               onClear={() => setMunicipioSelecionadoComparado(undefined)}
               clearable={false}
+              autoComplete="off"
             />
           </Tooltip>
         </VFlow>
       </HFlow>
-      {mediaNotasMunicipioBase.length > 0 &&
-        mediaNotasMunicipioComparado.length > 0 &&
-        municipioSelecionadoBase &&
-        municipioSelecionadoComparado && (
-          <Paper>
-            <HighchartsReact highcharts={Highcharts} options={options} />
-          </Paper>
-        )}
+     
+      <Grid>
+        {mediaNotasMunicipioBase.length > 0 &&
+          mediaNotasMunicipioComparado.length > 0 &&
+          municipioSelecionadoBase &&
+          municipioSelecionadoComparado && (
+            <Cell xs={6}>
+              <Paper>
+                <HighchartsReact highcharts={Highcharts} options={options} />
+              </Paper>
+            </Cell>
+          )}
+
+        {mediaNotasAvaliacaoMunicipioBase.length > 0 &&
+          mediaNotasAvaliacaoMunicipioComparado.length > 0 &&
+          municipioSelecionadoBase &&
+          municipioSelecionadoComparado && (
+            <Cell xs={6}>
+              <Paper>
+                <HighchartsReact
+                  highcharts={Highcharts}
+                  options={optionsAvaliacao}
+                />
+              </Paper>
+            </Cell>
+          )}
+      </Grid>
     </VFlow>
   );
 };
