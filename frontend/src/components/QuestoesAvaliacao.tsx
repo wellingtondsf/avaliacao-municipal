@@ -11,6 +11,8 @@ import {
   VFlow,
   Text,
   Tooltip,
+  Icon,
+  useTheme,
 } from "bold-ui";
 import { useFormik } from "formik";
 import { Dictionary } from "lodash";
@@ -178,6 +180,8 @@ export const QuestoesAvaliacao = (
     }
   };
 
+  const theme = useTheme()
+
   return (
     <VFlow>
       <Stepper>
@@ -248,8 +252,15 @@ export const QuestoesAvaliacao = (
               const questaoPath = `questoes[${key}][${idx}].resposta`;
               return (
                 <div key={questaoItem.id}>
-                  <Text fontWeight='bold' fontSize={1}>{`${idx + 1}. `}{questaoItem.nome}</Text> 
+                  <HFlow hSpacing={0.5} alignItems='center'>
+                  <Text fontWeight='bold' fontSize={1}>{`${idx + 1}. `}{questaoItem.nome} </Text> 
+                  {questaoItem.descricao && (
+                    <Tooltip text={questaoItem.descricao}>
+                       <Icon icon='infoCircleFilled' size={1} style={{'&:hover': {color: theme.pallete.primary.main}}}/>  
+                    </Tooltip>
+                  )}
                   {errorList.includes(questaoPath) && <Text fontWeight='bold' fontSize={1} color='danger'> *</Text>}
+                  </HFlow>
                   {errorList.includes(questaoPath) && (
                     <>
                     <br />

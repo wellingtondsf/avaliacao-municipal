@@ -16,6 +16,8 @@ import { BarItemProps } from "./Relatorio";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import HighchartsMore from "highcharts/highcharts-more";
+import { sortBy } from "lodash";
+
 
 export const CompararMunicipio = () => {
   const [estados, setEstados] = useState<Estado[]>([]);
@@ -112,10 +114,10 @@ export const CompararMunicipio = () => {
           `/api/questionario-respondido/findMediaRespostasByMunicipioId?municipioId=${municipioSelecionadoBase?.id}`
         )
         .then((response: AxiosResponse<BarItemProps[]>) => {
-          setMediaNotasMunicipioBase(
+          setMediaNotasMunicipioBase(sortBy(
             response.data.filter(
               (municipio) => municipio.item !== "Proteção de dados"
-            )
+            ), o => o.item)
           );
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
@@ -125,10 +127,10 @@ export const CompararMunicipio = () => {
           `/api/questionario-respondido/findMediaRespostasByMunicipioId?municipioId=${municipioSelecionadoComparado?.id}`
         )
         .then((response: AxiosResponse<BarItemProps[]>) => {
-          setMediaNotasMunicipioComparado(
+          setMediaNotasMunicipioComparado(sortBy(
             response.data.filter(
               (municipio) => municipio.item !== "Proteção de dados"
-            )
+            ), o => o.item)
           );
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
@@ -138,7 +140,7 @@ export const CompararMunicipio = () => {
           `/api/questionario-respondido/findMediaRespostasSimplificadaByMunicipioId?municipioId=${municipioSelecionadoBase?.id}`
         )
         .then((response: AxiosResponse<BarItemProps[]>) => {
-          setMediaNotasAvaliacaoMunicipioBase(response.data);
+          setMediaNotasAvaliacaoMunicipioBase(sortBy(response.data, o=> o.item));
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
 
@@ -147,7 +149,7 @@ export const CompararMunicipio = () => {
           `/api/questionario-respondido/findMediaRespostasSimplificadaByMunicipioId?municipioId=${municipioSelecionadoComparado?.id}`
         )
         .then((response: AxiosResponse<BarItemProps[]>) => {
-          setMediaNotasAvaliacaoMunicipioComparado(response.data);
+          setMediaNotasAvaliacaoMunicipioComparado(sortBy(response.data, o => o.item));
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
     }

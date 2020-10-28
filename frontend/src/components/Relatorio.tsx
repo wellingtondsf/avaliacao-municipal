@@ -1,14 +1,32 @@
 import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
-import { Paper, Select, Tooltip, VFlow } from "bold-ui";
+import {
+  Paper,
+  Select,
+  Tooltip,
+  VFlow,
+  HFlow,
+  Heading,
+  Grid,
+  Cell,
+  Text,
+} from "bold-ui";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import { Estado } from "../model/Estado";
 import { Municipio } from "../model/Municipio";
+import HighchartsMore from "highcharts/highcharts-more";
+import { Dictionary, chain, sortBy } from "lodash";
 
 export type BarItemProps = {
   media: number[];
   item: string;
+};
+
+type PiorQuestao = {
+  tipoQuestao: string;
+  nome: string;
+  respostasNegativas: number;
 };
 
 export const Relatorio = () => {
@@ -28,6 +46,18 @@ export const Relatorio = () => {
     mediaNotasMunicipioAvaliacao,
     setMediaNotasMunicipioAvaliacao,
   ] = useState<BarItemProps[]>([]);
+
+  const [mediaNotasEstadoAvaliacao, setMediaNotasEstadoAvaliacao] = useState<
+    BarItemProps[]
+  >([]);
+
+  const [mediaNotasEstado, setMediaNotasEstado] = useState<BarItemProps[]>([]);
+
+  const [pioresQuestoes, setPioresQuestoes] = useState<Dictionary<PiorQuestao[]>>();
+
+  const [pioresQuestoesAvaliacao, setPioresQuestoesAvaliacao] = useState<
+    PiorQuestao[]
+  >([]);
 
   const handleEstadoSelect = (estado: Estado | Estado[]) => {
     const estadoSelecionado = estado as Estado;
@@ -63,10 +93,10 @@ export const Relatorio = () => {
           `/api/questionario-respondido/findMediaRespostasByMunicipioId?municipioId=${municipioSelecionado?.id}`
         )
         .then((response: AxiosResponse<BarItemProps[]>) => {
-          setMediaNotasMunicipio(
+          setMediaNotasMunicipio(sortBy(
             response.data.filter(
               (municipio) => municipio.item !== "Proteção de dados"
-            )
+            ), o => o.item)
           );
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
@@ -76,11 +106,52 @@ export const Relatorio = () => {
           `/api/questionario-respondido/findMediaRespostasSimplificadaByMunicipioId?municipioId=${municipioSelecionado?.id}`
         )
         .then((response: AxiosResponse<BarItemProps[]>) => {
-          setMediaNotasMunicipioAvaliacao(response.data);
+          setMediaNotasMunicipioAvaliacao(sortBy(response.data, o => o.item));
+        })
+        .catch((response) => console.log("Ocorreu algum erro.", response));
+
+      axios
+        .get(
+          `/api/questionario-respondido/findMediaRespostasTamanhoMunicipioByEstadoTamanho?estadoId=${estadoSelecionado?.id}&tamanho=${municipioSelecionado.tamanho}`
+        )
+        .then((response: AxiosResponse<BarItemProps[]>) => {
+          setMediaNotasEstado(
+            sortBy(response.data.filter(
+              (municipio) => municipio.item !== "Proteção de dados"
+            ), o => o.item)
+          );
+        })
+        .catch((response) => console.log("Ocorreu algum erro.", response));
+
+      axios
+        .get(
+          `/api/questionario-respondido/findMediaRespostasSimplificadaTamanhoMunicipioByEstadoTamanho?estadoId=${estadoSelecionado?.id}&tamanho=${municipioSelecionado.tamanho}`
+        )
+        .then((response: AxiosResponse<BarItemProps[]>) => {
+          setMediaNotasEstadoAvaliacao(sortBy(response.data, o => o.item));
+        })
+        .catch((response) => console.log("Ocorreu algum erro.", response));
+
+      axios
+        .get(
+          `/api/questionario-respondido/findPioresQuestoes?municipioId=${municipioSelecionado?.id}`
+        )
+        .then((response: AxiosResponse<PiorQuestao[]>) => {
+          setPioresQuestoes(
+            chain(response.data).groupBy("nome").value());
+        })
+        .catch((response) => console.log("Ocorreu algum erro.", response));
+
+      axios
+        .get(
+          `/api/questionario-respondido/findPioresQuestoesSimplificada?municipioId=${municipioSelecionado?.id}`
+        )
+        .then((response: AxiosResponse<PiorQuestao[]>) => {
+          setPioresQuestoesAvaliacao(response.data);
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
     }
-  }, [municipioSelecionado]);
+  }, [municipioSelecionado, estadoSelecionado]);
 
   const options: Highcharts.Options = mediaNotasMunicipio && {
     chart: {
@@ -130,7 +201,8 @@ export const Relatorio = () => {
       type: "column",
     },
     title: {
-      text: "Media de notas do Município para a Avaliação cidadã de transparência municipal",
+      text:
+        "Media de notas do Município para a Avaliação cidadã de transparência municipal",
     },
 
     xAxis: {
@@ -168,8 +240,139 @@ export const Relatorio = () => {
     ),
   };
 
+  HighchartsMore(Highcharts);
+
+  const optionsEstado: Highcharts.Options = {
+    chart: {
+      polar: true,
+      type: "line",
+    },
+    title: {
+      text: "Escala SC Transparente",
+    },
+    subtitle: {
+      text:
+        "Comparação entre a média das notas do município selecionado com a média das notas dos municipios do mesmo tamanho no estado do município",
+    },
+
+    pane: {
+      size: "80%",
+    },
+
+    xAxis: {
+      categories: mediaNotasMunicipio.map((municipio) => municipio.item),
+      tickmarkPlacement: "on",
+      lineWidth: 0,
+    },
+
+    yAxis: {
+      gridLineInterpolation: "polygon",
+      min: 0,
+      max: 10,
+      lineWidth: 0,
+    },
+
+    tooltip: {
+      shared: true,
+      pointFormat:
+        '<span style="color:{series.color}"><b>{series.name}<b/>: <b>Nota {point.y:,.0f}</b><br/>',
+      useHTML: true,
+    },
+
+    legend: {
+      align: "right",
+      verticalAlign: "middle",
+      layout: "vertical",
+    },
+
+    series: [
+      {
+        name: municipioSelecionado?.nome,
+        data: mediaNotasMunicipio.map((municicipio) => municicipio.media),
+        pointPlacement: "on",
+        type: "line",
+      },
+      {
+        name: `${estadoSelecionado?.nome}`,
+        data: mediaNotasEstado.map((municicipio) => municicipio.media),
+        pointPlacement: "on",
+        type: "line",
+      },
+    ],
+  };
+
+  const optionsEstadoAvaliacao: Highcharts.Options = {
+    chart: {
+      polar: true,
+      type: "line",
+    },
+    title: {
+      text: "Avaliação cidadã de transparência municipal",
+    },
+    subtitle: {
+      text:
+        "Comparação entre a média das notas do município selecionado com a média das notas dos municipios do mesmo tamanho no estado do município",
+    },
+
+    pane: {
+      size: "80%",
+    },
+
+    xAxis: {
+      categories: mediaNotasMunicipioAvaliacao.map(
+        (municipio) => municipio.item
+      ),
+      tickmarkPlacement: "on",
+      lineWidth: 0,
+    },
+
+    yAxis: {
+      gridLineInterpolation: "polygon",
+      min: 0,
+      max: 10,
+      lineWidth: 0,
+    },
+
+    tooltip: {
+      shared: true,
+      pointFormat:
+        '<span style="color:{series.color}"><b>{series.name}<b/>: <b>Nota {point.y:,.0f}</b><br/>',
+      useHTML: true,
+    },
+
+    legend: {
+      align: "right",
+      verticalAlign: "middle",
+      layout: "vertical",
+    },
+
+    series: [
+      {
+        name: municipioSelecionado?.nome,
+        data: mediaNotasMunicipioAvaliacao.map(
+          (municicipio) => municicipio.media
+        ),
+        pointPlacement: "on",
+        type: "line",
+      },
+      {
+        name: `${estadoSelecionado?.nome}`,
+        data: mediaNotasEstadoAvaliacao.map((municicipio) => municicipio.media),
+        pointPlacement: "on",
+        type: "line",
+      },
+    ],
+  };
+
+  console.log(pioresQuestoes)
+
   return (
     <VFlow>
+      <HFlow justifyContent="center">
+        <Heading color="normal" level={1}>
+          Relatório do município
+        </Heading>
+      </HFlow>
       <Select<Estado>
         label="Estado"
         items={estados}
@@ -209,6 +412,61 @@ export const Relatorio = () => {
           <HighchartsReact highcharts={Highcharts} options={optionsAvaliacao} />
         </Paper>
       )}
+      <Grid>
+        {mediaNotasEstado.length > 0 && municipioSelecionado && (
+          <Cell xs={6}>
+            <Paper>
+              <HighchartsReact
+                highcharts={Highcharts}
+                options={optionsEstado}
+              />
+            </Paper>
+          </Cell>
+        )}
+
+        {mediaNotasEstadoAvaliacao.length > 0 && municipioSelecionado && (
+          <Cell xs={6}>
+            <Paper>
+              <HighchartsReact
+                highcharts={Highcharts}
+                options={optionsEstadoAvaliacao}
+              />
+            </Paper>
+          </Cell>
+        )}
+      </Grid>
+
+      <Grid>
+        <Cell xs={6}>
+          {municipioSelecionado && (
+            <Paper style={{ width: "744px" }}>
+              <HFlow justifyContent="center">
+                <Heading color="normal" level={4}>
+                  Questões mais negativas da Escala SC Transparente
+                </Heading>
+              </HFlow>
+       
+            </Paper>
+          )}
+        </Cell>
+
+        <Cell xs={6}>
+          {municipioSelecionado && (
+            <Paper style={{ width: "744px" }}>
+              <HFlow justifyContent="center">
+                <Heading color="normal" level={4}>
+                  Questões mais negativas da Avaliação cidadã de transparência
+                  municipal
+                </Heading>
+              </HFlow>
+              {pioresQuestoesAvaliacao.length > 0 &&
+                pioresQuestoesAvaliacao.map((questao, key) => (
+                  <Text id={key}>{questao.nome}</Text>
+                ))}
+            </Paper>
+          )}
+        </Cell>
+      </Grid>
     </VFlow>
   );
 };

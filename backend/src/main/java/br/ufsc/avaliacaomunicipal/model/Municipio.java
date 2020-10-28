@@ -29,4 +29,7 @@ public class Municipio {
 
 	@Column(name = "NUM_POP")
 	private Long populacao;
+
+	@Column(name = "TAMANHO_MUNICIPIO")
+	private String tamanho;
 }

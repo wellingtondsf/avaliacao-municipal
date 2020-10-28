@@ -4,4 +4,5 @@ export interface Municipio {
   id: number;
   nome: string;
   estado: Estado;
+  tamanho: string
 }

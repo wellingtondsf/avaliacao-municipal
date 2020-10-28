@@ -96,7 +96,7 @@ INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) V
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O link que eu acessei possui os dados definidos?', 305, 2, 1);
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está atualizado? Considerar que não caso não exista informações sobre data.', 315, 2, 1);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está disponibilizado sob uma licença aberta? Considerar que não caso não exista informações sobre a licença.',
- 'As licenças de direitos autoriais tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 1);
+ 'As licenças de direitos autoriais abertas tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 1);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos que podem ser lidos por programas de computador? ',
 'Um arquivo Excel em vez de um PDF, ou um arquivo em formato CSV, XML, ODS, entre outros.', 675, 2, 1);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos não proprietários? ',
@@ -106,7 +106,7 @@ INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) V
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O link que eu acessei possui os dados definidos?', 305, 2, 2);
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está atualizado? Considerar que não caso não exista informações sobre data.', 315, 2, 2);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está disponibilizado sob uma licença aberta? Considerar que não caso não exista informações sobre a licença.',
- 'As licenças de direitos autoriais tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 2);
+ 'As licenças de direitos autoriais abertas tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 2);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos que podem ser lidos por programas de computador? ',
 'Um arquivo Excel em vez de um PDF, ou um arquivo em formato CSV, XML, ODS, entre outros.', 675, 2, 2);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos não proprietários? ',
@@ -116,7 +116,7 @@ INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) V
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O link que eu acessei possui os dados definidos?', 305, 2, 3);
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está atualizado? Considerar que não caso não exista informações sobre data.', 315, 2, 3);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está disponibilizado sob uma licença aberta? Considerar que não caso não exista informações sobre a licença.',
- 'As licenças de direitos autoriais tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 3);
+ 'As licenças de direitos autoriais abertas tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 3);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos que podem ser lidos por programas de computador? ',
 'Um arquivo Excel em vez de um PDF, ou um arquivo em formato CSV, XML, ODS, entre outros.', 675, 2, 3);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos não proprietários? ',
@@ -126,7 +126,7 @@ INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) V
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O link que eu acessei possui os dados definidos?', 305, 2, 4);
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está atualizado? Considerar que não caso não exista informações sobre data.', 315, 2, 4);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está disponibilizado sob uma licença aberta? Considerar que não caso não exista informações sobre a licença.',
- 'As licenças de direitos autoriais tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 4);
+ 'As licenças de direitos autoriais abertas tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 4);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos que podem ser lidos por programas de computador? ',
 'Um arquivo Excel em vez de um PDF, ou um arquivo em formato CSV, XML, ODS, entre outros.', 675, 2, 4);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos não proprietários? ',
@@ -136,7 +136,7 @@ INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) V
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O link que eu acessei possui os dados definidos?', 305, 2, 5);
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está atualizado? Considerar que não caso não exista informações sobre data.', 315, 2, 5);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está disponibilizado sob uma licença aberta? Considerar que não caso não exista informações sobre a licença.',
- 'As licenças de direitos autoriais tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 5);
+ 'As licenças de direitos autoriais abertas tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 5);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos que podem ser lidos por programas de computador? ',
 'Um arquivo Excel em vez de um PDF, ou um arquivo em formato CSV, XML, ODS, entre outros.', 675, 2, 5);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos não proprietários? ',
@@ -146,7 +146,7 @@ INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) V
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O link que eu acessei possui os dados definidos?', 305, 2, 6);
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está atualizado? Considerar que não caso não exista informações sobre data.', 315, 2, 6);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está disponibilizado sob uma licença aberta? Considerar que não caso não exista informações sobre a licença.',
- 'As licenças de direitos autoriais tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 6);
+ 'As licenças de direitos autoriais abertas tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 6);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos que podem ser lidos por programas de computador? ',
 'Um arquivo Excel em vez de um PDF, ou um arquivo em formato CSV, XML, ODS, entre outros.', 675, 2, 6);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos não proprietários? ',
@@ -156,7 +156,7 @@ INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) V
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O link que eu acessei possui os dados definidos?', 305, 2, 7);
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está atualizado? Considerar que não caso não exista informações sobre data.', 315, 2, 7);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está disponibilizado sob uma licença aberta? Considerar que não caso não exista informações sobre a licença.',
- 'As licenças de direitos autoriais tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 7);
+ 'As licenças de direitos autoriais abertas tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 7);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos que podem ser lidos por programas de computador? ',
 'Um arquivo Excel em vez de um PDF, ou um arquivo em formato CSV, XML, ODS, entre outros.', 675, 2, 7);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos não proprietários? ',
@@ -166,7 +166,7 @@ INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) V
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O link que eu acessei possui os dados definidos?', 305, 2, 8);
 INSERT INTO tb_questao (no_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está atualizado? Considerar que não caso não exista informações sobre data.', 315, 2, 8);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O dado está disponibilizado sob uma licença aberta? Considerar que não caso não exista informações sobre a licença.',
- 'As licenças de direitos autoriais tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 8);
+ 'As licenças de direitos autoriais abertas tem como objetivo possibilitar o uso de materiais produzidos por terceiros sem a necessidade de receber a aprovação do autor. Basta que atenda as exigências da licença. Licenças abertas possibilitam a utilização gratuitamente.', 315, 2, 8);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos que podem ser lidos por programas de computador? ',
 'Um arquivo Excel em vez de um PDF, ou um arquivo em formato CSV, XML, ODS, entre outros.', 675, 2, 8);
 INSERT INTO tb_questao (no_questao, ds_questao, qt_pontos, co_questionario, co_tp_questao) VALUES  ('O site disponibiliza os dados em formatos não proprietários? ',
@@ -22482,3 +22482,9 @@ VALUES (52, 5222302, 'Vila Propício', 5882);
 
 INSERT INTO TB_MUNICIPIO(CO_ESTADO, CO_SEQ_MUNICIPIO, NO_MUNICIPIO, NUM_POP)
 VALUES (53, 5300108, 'Brasília', 3055149);
+
+UPDATE tb_municipio SET tamanho_municipio = 'Pequeno' WHERE num_pop <= 50000;
+
+UPDATE tb_municipio SET tamanho_municipio = 'Medio' WHERE num_pop > 50000 AND num_pop <= 150000;
+
+UPDATE tb_municipio SET tamanho_municipio = 'Grande' WHERE num_pop > 150000;

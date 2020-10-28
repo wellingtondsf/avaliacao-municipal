@@ -1,6 +1,6 @@
 package br.ufsc.avaliacaomunicipal.dto;
 
-public interface GraficoMediaRespostasDTO {
+public interface GraficoMediaRespostasInterface {
 	double getMedia();
 
 	String getItem();

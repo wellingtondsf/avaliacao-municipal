@@ -15,6 +15,7 @@ export type QuestaoItem = {
   nome: string;
   pontos: number;
   resposta: boolean | "";
+  descricao: string;
 };
 
 export const Avaliar = () => {
@@ -24,7 +25,11 @@ export const Avaliar = () => {
     return (
       <VFlow vSpacing={3}>
         <VFlow>
-          <Heading level={1}>Avaliação de municípios</Heading>
+          <HFlow justifyContent="center">
+            <Heading color="normal" level={1}>
+              Avaliação de municípios
+            </Heading>
+          </HFlow>
           <Text fontSize={1}>
             A plataforma de avaliação municipal possui duas formas de avaliar se
             um município esta de acordo com a Lei de Acesso a Informação.
@@ -58,13 +63,13 @@ export const Avaliar = () => {
             <Link to={`${url}/cidada-transparencia-municipal`} role="button">
               <VFlow>
                 <Text fontWeight="bold" fontSize={1}>
-                Avaliação cidadã de transparência municipal
+                  Avaliação cidadã de transparência municipal
                 </Text>
                 <Text>
-                  A Avaliação cidadã de transparência municipal possui um conteudo mais enxuto e
-                  simples, removendo itens e questões que necessitam um
-                  conhecimento mais tecnico ou conhecimento previo sobre como a
-                  Lei de Acesso a Informação funciona.
+                  A Avaliação cidadã de transparência municipal possui um
+                  conteudo mais enxuto e simples, removendo itens e questões que
+                  necessitam um conhecimento mais tecnico ou conhecimento previo
+                  sobre como a Lei de Acesso a Informação funciona.
                 </Text>
               </VFlow>
             </Link>
