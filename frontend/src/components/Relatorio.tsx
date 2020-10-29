@@ -439,7 +439,7 @@ export const Relatorio = () => {
       <Grid>
         <Cell xs={6}>
           {municipioSelecionado && (
-            <Paper style={{ width: "744px" }}>
+            <Paper style={{ width: "100%" }}>
               <HFlow justifyContent="center">
                 <Heading color="normal" level={4}>
                   Questões mais negativas da Escala SC Transparente
@@ -452,7 +452,7 @@ export const Relatorio = () => {
 
         <Cell xs={6}>
           {municipioSelecionado && (
-            <Paper style={{ width: "744px" }}>
+            <Paper style={{ width: "100%" }}>
               <HFlow justifyContent="center">
                 <Heading color="normal" level={4}>
                   Questões mais negativas da Avaliação cidadã de transparência

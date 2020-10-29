@@ -3,7 +3,6 @@ package br.ufsc.avaliacaomunicipal.controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +43,7 @@ import br.ufsc.avaliacaomunicipal.repository.QuestaoRepository;
 import br.ufsc.avaliacaomunicipal.repository.QuestionarioRepository;
 import br.ufsc.avaliacaomunicipal.repository.QuestionarioRespondidoRepository;
 import br.ufsc.avaliacaomunicipal.repository.RespostaRepository;
+import br.ufsc.avaliacaomunicipal.util.AttributeEncryptor;
 
 @RequestMapping("/api/questionario-respondido")
 @RestController
@@ -58,6 +58,7 @@ public class QuestionarioRespondidoController {
 	private final QuestaoRepository questaoRepository;
 	private final RespostaRepository respostaRepository;
 	private Map<Long, Questao> questaoMapping;
+	private final AttributeEncryptor attributeEncryptor;
 
 	@PostConstruct
 	public void init() {
@@ -77,14 +78,10 @@ public class QuestionarioRespondidoController {
 	@Transactional
 	@CrossOrigin
 	public ResponseEntity<String> inserirQuestionarioRespondido(@RequestBody QuestionarioRespondidoDTO questionarioRespondidoDTO) {
-
-		Calendar cal = Calendar.getInstance();
-		cal.clear();
-		cal.set(Calendar.YEAR, new Date().getYear());
-
 		QuestionarioRespondido jaRespondido = this.questionarioRespondidoRepository
-				.findByCpfMunicipioDate(questionarioRespondidoDTO.getNuCpf(), questionarioRespondidoDTO.getMunicipio().getId(), questionarioRespondidoDTO.getQuestionarioId(),
-						cal.getTime());
+				.findByCpfMunicipioDate(this.attributeEncryptor.convertToDatabaseColumn(questionarioRespondidoDTO.getNuCpf()), questionarioRespondidoDTO.getMunicipio().getId(),
+						questionarioRespondidoDTO.getQuestionarioId(),
+						LocalDate.now().getYear());
 
 		if (jaRespondido != null) {
 			this.questionarioRespondidoRepository.updateDate(new Date(), jaRespondido.getId());

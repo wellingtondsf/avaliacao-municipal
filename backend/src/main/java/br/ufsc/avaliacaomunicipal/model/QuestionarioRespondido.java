@@ -3,6 +3,7 @@ package br.ufsc.avaliacaomunicipal.model;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,8 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import br.ufsc.avaliacaomunicipal.util.AttributeEncryptor;
 
 @Entity
 @Getter
@@ -33,7 +36,8 @@ public class QuestionarioRespondido {
 	@JoinColumn(name = "CO_MUNICIPIO")
 	private Municipio municipio;
 
-	@Column(name = "NU_CPF", length = 14, updatable = false, nullable = false)
+	@Convert(converter = AttributeEncryptor.class)
+	@Column(name = "NU_CPF", updatable = false, nullable = false)
 	private String nuCpf;
 
 	@Column(name = "DT_RESPOSTA")
