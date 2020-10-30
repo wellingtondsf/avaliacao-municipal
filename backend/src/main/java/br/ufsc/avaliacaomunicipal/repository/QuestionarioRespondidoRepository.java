@@ -68,7 +68,7 @@ public interface QuestionarioRespondidoRepository extends JpaRepository<Question
 	List<GraficoMediaRespostasInterface> findMediaRespostasSimplificadaTamanhoMunicipioByEstadoTamanho(Long estadoId, String tamanhoMunicipio);
 
 	@Query(value =
-			"select no_tp_questao , no_questao, count from (select ttq.no_tp_questao, tq.no_questao, row_number() over (partition by  ttq.no_tp_questao) as rownum, "
+			"select no_tp_questao as tipoQuestao, no_questao as nome, count as respostasNegativas from (select ttq.no_tp_questao, tq.no_questao, row_number() over (partition by  ttq.no_tp_questao) as rownum, "
 					+ "count (*) from tb_tp_questao ttq "
 					+ "inner join tb_questao tq on tq.co_tp_questao  = ttq.co_tp_questao "
 					+ "inner join tb_resposta tr on tr.co_questao = tq.co_seq_questao "

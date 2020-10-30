@@ -55,10 +55,8 @@ export const Relatorio = () => {
 
   const [pioresQuestoes, setPioresQuestoes] = useState<Dictionary<PiorQuestao[]>>();
 
-  const [pioresQuestoesAvaliacao, setPioresQuestoesAvaliacao] = useState<
-    PiorQuestao[]
-  >([]);
-
+  const [pioresQuestoesAvaliacao, setPioresQuestoesAvaliacao] = useState<Dictionary<PiorQuestao[]>>()
+  
   const handleEstadoSelect = (estado: Estado | Estado[]) => {
     const estadoSelecionado = estado as Estado;
     setEstadoSelecionado(estadoSelecionado);
@@ -138,7 +136,7 @@ export const Relatorio = () => {
         )
         .then((response: AxiosResponse<PiorQuestao[]>) => {
           setPioresQuestoes(
-            chain(response.data).groupBy("nome").value());
+            chain(response.data).groupBy("tipoQuestao").value());
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
 
@@ -147,11 +145,14 @@ export const Relatorio = () => {
           `/api/questionario-respondido/findPioresQuestoesSimplificada?municipioId=${municipioSelecionado?.id}`
         )
         .then((response: AxiosResponse<PiorQuestao[]>) => {
-          setPioresQuestoesAvaliacao(response.data);
+          setPioresQuestoesAvaliacao(
+            chain(response.data).groupBy("tipoQuestao").value());
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
     }
   }, [municipioSelecionado, estadoSelecionado]);
+
+console.log(pioresQuestoes)
 
   const options: Highcharts.Options = mediaNotasMunicipio && {
     chart: {
@@ -364,7 +365,6 @@ export const Relatorio = () => {
     ],
   };
 
-  console.log(pioresQuestoes)
 
   return (
     <VFlow>
@@ -441,11 +441,35 @@ export const Relatorio = () => {
           {municipioSelecionado && (
             <Paper style={{ width: "100%" }}>
               <HFlow justifyContent="center">
-                <Heading color="normal" level={4}>
+              <Text color="normal" fontSize={1} style= { pioresQuestoes && Object.keys(pioresQuestoes).length > 0 && {paddingBottom: '1rem'}}>
                   Questões mais negativas da Escala SC Transparente
-                </Heading>
+                </Text>
               </HFlow>
-       
+              {pioresQuestoes && Object.keys(pioresQuestoes).length > 0 &&
+                Object.keys(pioresQuestoes).map((key) => (
+                  <VFlow vSpacing={0} style={{paddingBottom: '2rem', paddingLeft: '1rem', paddingRight: '1rem'}}>
+                    <Grid justifyContent= 'space-between'>
+                    <Cell xs= {9}>
+                    <Text id={key} fontWeight='bold'>{key}</Text>
+                      </Cell>
+                      <Cell xs= {3}>
+                    <Text fontWeight='bold'>Respostas negativas</Text>
+                      </Cell>
+                      </Grid>
+                    <VFlow vSpacing= {0}>
+                    {pioresQuestoes[key].map((questao, key) => (
+                      <Grid justifyContent= 'space-between'>
+                          <Cell xs= {9}>
+                          <Text key={key + questao.nome}> {questao.nome}</Text>
+                          </Cell>
+                          <Cell xs= {3} style={{textAlign: 'center'}}>
+                          <Text fontWeight='bold'>{questao.respostasNegativas}</Text>
+                          </Cell>
+                      </Grid>
+                        ))}
+                        </VFlow>
+                  </VFlow>
+                ))}
             </Paper>
           )}
         </Cell>
@@ -453,15 +477,35 @@ export const Relatorio = () => {
         <Cell xs={6}>
           {municipioSelecionado && (
             <Paper style={{ width: "100%" }}>
-              <HFlow justifyContent="center">
-                <Heading color="normal" level={4}>
-                  Questões mais negativas da Avaliação cidadã de transparência
-                  municipal
-                </Heading>
+                <HFlow justifyContent="center">
+              <Text color="normal" fontSize={1} style={  pioresQuestoesAvaliacao && Object.keys(pioresQuestoesAvaliacao).length > 0 && {paddingBottom: '1rem'}}>
+                  Questões mais negativas da Escala SC Transparente
+                </Text>
               </HFlow>
-              {pioresQuestoesAvaliacao.length > 0 &&
-                pioresQuestoesAvaliacao.map((questao, key) => (
-                  <Text id={key}>{questao.nome}</Text>
+               {pioresQuestoesAvaliacao && Object.keys(pioresQuestoesAvaliacao).length > 0 &&
+                Object.keys(pioresQuestoesAvaliacao).map((key) => (
+                  <VFlow vSpacing={0} style={{paddingLeft: '1rem', paddingRight: '1rem'}}>
+                    <Grid justifyContent= 'space-between'>
+                    <Cell xs= {9}>
+                    <Text id={key} fontWeight='bold'>{key}</Text>
+                      </Cell>
+                      <Cell xs= {3}>
+                    <Text fontWeight='bold'>Respostas negativas</Text>
+                      </Cell>
+                      </Grid>
+                    <VFlow vSpacing= {0}>
+                    {pioresQuestoesAvaliacao[key].map((questao, key) => (
+                      <Grid justifyContent= 'space-between'>
+                          <Cell xs= {9}>
+                          <Text key={key + questao.nome}> {questao.nome}</Text>
+                          </Cell>
+                          <Cell xs= {3} style={{textAlign: 'center'}}>
+                          <Text fontWeight='bold'>{questao.respostasNegativas}</Text>
+                          </Cell>
+                      </Grid>
+                        ))}
+                        </VFlow>
+                  </VFlow>
                 ))}
             </Paper>
           )}
