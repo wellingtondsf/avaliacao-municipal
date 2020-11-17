@@ -11,6 +11,7 @@ import {
   Cell,
   Grid,
   Heading,
+  Text
 } from "bold-ui";
 import { BarItemProps } from "./Relatorio";
 import HighchartsReact from "highcharts-react-official";
@@ -292,8 +293,10 @@ export const CompararMunicipio = () => {
         Comparar Municípios
       </Heading>
       </HFlow>
-      <HFlow justifyContent="center" hSpacing={8}>
+      <HFlow justifyContent="center" hSpacing={15}>
+        <Paper style={{padding: '1rem'}} >
         <VFlow>
+          <Text fontWeight='bold' fontSize={1}>Selecione o 1.° município</Text>
           <Select<Estado>
             label="Estado"
             items={estados}
@@ -324,11 +327,20 @@ export const CompararMunicipio = () => {
               onClear={() => setMunicipioSelecionadoBase(undefined)}
               clearable={false}
               autoComplete="off"
+              renderItem= {(municipio: Municipio | null) => (
+                <VFlow vSpacing={0}>
+                  <Text>{municipio?.nome ?? ""}</Text>
+                  <Text> Tamanho: {municipio?.tamanho ?? ""}</Text>
+                  </VFlow>
+              )}
             />
           </Tooltip>
         </VFlow>
+          </Paper>
 
+          <Paper style={{padding: '1rem'}} >
         <VFlow>
+        <Text fontWeight='bold' fontSize={1}>Selecione o 2.° município</Text>
           <Select<Estado>
             label="Estado"
             items={estados}
@@ -361,9 +373,16 @@ export const CompararMunicipio = () => {
               onClear={() => setMunicipioSelecionadoComparado(undefined)}
               clearable={false}
               autoComplete="off"
+              renderItem= {(municipio: Municipio | null) => (
+                <VFlow vSpacing={0}>
+                  <Text>{municipio?.nome ?? ""}</Text>
+                  <Text> Tamanho: {municipio?.tamanho ?? ""}</Text>
+                  </VFlow>
+              )}
             />
           </Tooltip>
         </VFlow>
+        </Paper>
       </HFlow>
      
       <Grid>

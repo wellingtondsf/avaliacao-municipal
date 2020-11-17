@@ -53,10 +53,14 @@ export const Relatorio = () => {
 
   const [mediaNotasEstado, setMediaNotasEstado] = useState<BarItemProps[]>([]);
 
-  const [pioresQuestoes, setPioresQuestoes] = useState<Dictionary<PiorQuestao[]>>();
+  const [pioresQuestoes, setPioresQuestoes] = useState<
+    Dictionary<PiorQuestao[]>
+  >();
 
-  const [pioresQuestoesAvaliacao, setPioresQuestoesAvaliacao] = useState<Dictionary<PiorQuestao[]>>()
-  
+  const [pioresQuestoesAvaliacao, setPioresQuestoesAvaliacao] = useState<
+    Dictionary<PiorQuestao[]>
+  >();
+
   const handleEstadoSelect = (estado: Estado | Estado[]) => {
     const estadoSelecionado = estado as Estado;
     setEstadoSelecionado(estadoSelecionado);
@@ -91,10 +95,13 @@ export const Relatorio = () => {
           `/api/questionario-respondido/findMediaRespostasByMunicipioId?municipioId=${municipioSelecionado?.id}`
         )
         .then((response: AxiosResponse<BarItemProps[]>) => {
-          setMediaNotasMunicipio(sortBy(
-            response.data.filter(
-              (municipio) => municipio.item !== "Proteção de dados"
-            ), o => o.item)
+          setMediaNotasMunicipio(
+            sortBy(
+              response.data.filter(
+                (municipio) => municipio.item !== "Proteção de dados"
+              ),
+              (o) => o.item
+            )
           );
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
@@ -104,7 +111,7 @@ export const Relatorio = () => {
           `/api/questionario-respondido/findMediaRespostasSimplificadaByMunicipioId?municipioId=${municipioSelecionado?.id}`
         )
         .then((response: AxiosResponse<BarItemProps[]>) => {
-          setMediaNotasMunicipioAvaliacao(sortBy(response.data, o => o.item));
+          setMediaNotasMunicipioAvaliacao(sortBy(response.data, (o) => o.item));
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
 
@@ -114,9 +121,12 @@ export const Relatorio = () => {
         )
         .then((response: AxiosResponse<BarItemProps[]>) => {
           setMediaNotasEstado(
-            sortBy(response.data.filter(
-              (municipio) => municipio.item !== "Proteção de dados"
-            ), o => o.item)
+            sortBy(
+              response.data.filter(
+                (municipio) => municipio.item !== "Proteção de dados"
+              ),
+              (o) => o.item
+            )
           );
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
@@ -126,7 +136,7 @@ export const Relatorio = () => {
           `/api/questionario-respondido/findMediaRespostasSimplificadaTamanhoMunicipioByEstadoTamanho?estadoId=${estadoSelecionado?.id}&tamanho=${municipioSelecionado.tamanho}`
         )
         .then((response: AxiosResponse<BarItemProps[]>) => {
-          setMediaNotasEstadoAvaliacao(sortBy(response.data, o => o.item));
+          setMediaNotasEstadoAvaliacao(sortBy(response.data, (o) => o.item));
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
 
@@ -136,7 +146,8 @@ export const Relatorio = () => {
         )
         .then((response: AxiosResponse<PiorQuestao[]>) => {
           setPioresQuestoes(
-            chain(response.data).groupBy("tipoQuestao").value());
+            chain(response.data).groupBy("tipoQuestao").value()
+          );
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
 
@@ -146,20 +157,21 @@ export const Relatorio = () => {
         )
         .then((response: AxiosResponse<PiorQuestao[]>) => {
           setPioresQuestoesAvaliacao(
-            chain(response.data).groupBy("tipoQuestao").value());
+            chain(response.data).groupBy("tipoQuestao").value()
+          );
         })
         .catch((response) => console.log("Ocorreu algum erro.", response));
     }
   }, [municipioSelecionado, estadoSelecionado]);
 
-console.log(pioresQuestoes)
+  console.log(pioresQuestoes);
 
   const options: Highcharts.Options = mediaNotasMunicipio && {
     chart: {
       type: "column",
     },
     title: {
-      text: "Media de notas do Município para a Escala SC Transparente",
+      text: "Média de notas do Município para a Escala SC Transparente",
     },
 
     xAxis: {
@@ -203,7 +215,7 @@ console.log(pioresQuestoes)
     },
     title: {
       text:
-        "Media de notas do Município para a Avaliação cidadã de transparência municipal",
+        "Média de notas do Município para a Avaliação cidadã de transparência municipal",
     },
 
     xAxis: {
@@ -365,14 +377,18 @@ console.log(pioresQuestoes)
     ],
   };
 
-
   return (
     <VFlow>
       <HFlow justifyContent="center">
         <Heading color="normal" level={1}>
           Relatório do município
         </Heading>
+
       </HFlow>
+        <Paper style={{padding: '1rem', width: '23rem'}} >
+          <VFlow>
+          <Text fontWeight='bold' fontSize={1}>Selecione o município</Text>
+
       <Select<Estado>
         label="Estado"
         items={estados}
@@ -402,6 +418,8 @@ console.log(pioresQuestoes)
           autoComplete="off"
         />
       </Tooltip>
+      </VFlow>
+      </Paper>
       {mediaNotasMunicipio.length > 0 && municipioSelecionado && (
         <Paper>
           <HighchartsReact highcharts={Highcharts} options={options} />
@@ -441,33 +459,57 @@ console.log(pioresQuestoes)
           {municipioSelecionado && (
             <Paper style={{ width: "100%" }}>
               <HFlow justifyContent="center">
-              <Text color="normal" fontSize={1} style= { pioresQuestoes && Object.keys(pioresQuestoes).length > 0 && {paddingBottom: '1rem'}}>
+                <Text
+                  color="normal"
+                  fontSize={1}
+                  style={
+                    pioresQuestoes &&
+                    Object.keys(pioresQuestoes).length > 0 && {
+                      paddingBottom: "1rem",
+                    }
+                  }
+                >
                   Questões mais negativas da Escala SC Transparente
                 </Text>
               </HFlow>
-              {pioresQuestoes && Object.keys(pioresQuestoes).length > 0 &&
+              {pioresQuestoes &&
+                Object.keys(pioresQuestoes).length > 0 &&
                 Object.keys(pioresQuestoes).map((key) => (
-                  <VFlow vSpacing={0} style={{paddingBottom: '2rem', paddingLeft: '1rem', paddingRight: '1rem'}}>
-                    <Grid justifyContent= 'space-between'>
-                    <Cell xs= {9}>
-                    <Text id={key} fontWeight='bold'>{key}</Text>
+                  <VFlow
+                    vSpacing={0}
+                    style={{
+                      paddingLeft: "1rem",
+                      paddingRight: "1rem",
+                      paddingTop: "1rem",
+                    }}
+                  >
+                    <Grid justifyContent="space-between">
+                      <Cell xs={9}>
+                        <Text id={key} fontWeight="bold">
+                          {key}
+                        </Text>
                       </Cell>
-                      <Cell xs= {3}>
-                    <Text fontWeight='bold'>Respostas negativas</Text>
+                      <Cell xs={3}>
+                        <Text fontWeight="bold">Respostas negativas</Text>
                       </Cell>
-                      </Grid>
-                    <VFlow vSpacing= {0}>
-                    {pioresQuestoes[key].map((questao, key) => (
-                      <Grid justifyContent= 'space-between'>
-                          <Cell xs= {9}>
-                          <Text key={key + questao.nome}> {questao.nome}</Text>
+                    </Grid>
+                    <VFlow vSpacing={0}>
+                      {pioresQuestoes[key].map((questao, key) => (
+                        <Grid justifyContent="space-between">
+                          <Cell xs={9}>
+                            <Text key={key + questao.nome}>
+                              {" "}
+                              {questao.nome}
+                            </Text>
                           </Cell>
-                          <Cell xs= {3} style={{textAlign: 'center'}}>
-                          <Text fontWeight='bold'>{questao.respostasNegativas}</Text>
+                          <Cell xs={3} style={{ textAlign: "center" }}>
+                            <Text fontWeight="bold">
+                              {questao.respostasNegativas}
+                            </Text>
                           </Cell>
-                      </Grid>
-                        ))}
-                        </VFlow>
+                        </Grid>
+                      ))}
+                    </VFlow>
                   </VFlow>
                 ))}
             </Paper>
@@ -477,34 +519,58 @@ console.log(pioresQuestoes)
         <Cell xs={6}>
           {municipioSelecionado && (
             <Paper style={{ width: "100%" }}>
-                <HFlow justifyContent="center">
-              <Text color="normal" fontSize={1} style={  pioresQuestoesAvaliacao && Object.keys(pioresQuestoesAvaliacao).length > 0 && {paddingBottom: '1rem'}}>
+              <HFlow justifyContent="center">
+                <Text
+                  color="normal"
+                  fontSize={1}
+                  style={
+                    pioresQuestoesAvaliacao &&
+                    Object.keys(pioresQuestoesAvaliacao).length > 0 && {
+                      paddingBottom: "1rem",
+                    }
+                  }
+                >
                   Questões mais negativas da Escala SC Transparente
                 </Text>
               </HFlow>
-               {pioresQuestoesAvaliacao && Object.keys(pioresQuestoesAvaliacao).length > 0 &&
+              {pioresQuestoesAvaliacao &&
+                Object.keys(pioresQuestoesAvaliacao).length > 0 &&
                 Object.keys(pioresQuestoesAvaliacao).map((key) => (
-                  <VFlow vSpacing={0} style={{paddingLeft: '1rem', paddingRight: '1rem'}}>
-                    <Grid justifyContent= 'space-between'>
-                    <Cell xs= {9}>
-                    <Text id={key} fontWeight='bold'>{key}</Text>
+                  <VFlow
+                    vSpacing={0}
+                    style={{
+                      paddingLeft: "1rem",
+                      paddingRight: "1rem",
+                      paddingTop: "1rem",
+                    }}
+                  >
+                    <Grid justifyContent="space-between">
+                      <Cell xs={9}>
+                        <Text id={key} fontWeight="bold">
+                          {key}
+                        </Text>
                       </Cell>
-                      <Cell xs= {3}>
-                    <Text fontWeight='bold'>Respostas negativas</Text>
+                      <Cell xs={3}>
+                        <Text fontWeight="bold">Respostas negativas</Text>
                       </Cell>
-                      </Grid>
-                    <VFlow vSpacing= {0}>
-                    {pioresQuestoesAvaliacao[key].map((questao, key) => (
-                      <Grid justifyContent= 'space-between'>
-                          <Cell xs= {9}>
-                          <Text key={key + questao.nome}> {questao.nome}</Text>
+                    </Grid>
+                    <VFlow vSpacing={0}>
+                      {pioresQuestoesAvaliacao[key].map((questao, key) => (
+                        <Grid justifyContent="space-between">
+                          <Cell xs={9}>
+                            <Text key={key + questao.nome}>
+                              {" "}
+                              {questao.nome}
+                            </Text>
                           </Cell>
-                          <Cell xs= {3} style={{textAlign: 'center'}}>
-                          <Text fontWeight='bold'>{questao.respostasNegativas}</Text>
+                          <Cell xs={3} style={{ textAlign: "center" }}>
+                            <Text fontWeight="bold">
+                              {questao.respostasNegativas}
+                            </Text>
                           </Cell>
-                      </Grid>
-                        ))}
-                        </VFlow>
+                        </Grid>
+                      ))}
+                    </VFlow>
                   </VFlow>
                 ))}
             </Paper>

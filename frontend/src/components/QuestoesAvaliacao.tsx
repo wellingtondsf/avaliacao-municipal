@@ -13,6 +13,8 @@ import {
   Tooltip,
   Icon,
   useTheme,
+  Heading,
+  Paper,
 } from "bold-ui";
 import { useFormik } from "formik";
 import { Dictionary } from "lodash";
@@ -33,9 +35,7 @@ export interface QuestoesAvaliacaoProps {
   handleSubmit: (value: QuestionarioRespondido) => void;
 }
 
-export const QuestoesAvaliacao = (
-  props: QuestoesAvaliacaoProps
-) => {
+export const QuestoesAvaliacao = (props: QuestoesAvaliacaoProps) => {
   const { questoes, questionarioId, handleSubmit } = props;
 
   const { getStepProps, nextStep, previousStep, currentStep } = useStepperState(
@@ -97,8 +97,7 @@ export const QuestoesAvaliacao = (
     const errorList = validate();
     if (errorList.length === 0) {
       nextStep();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       setErrorList(errorList);
     }
@@ -110,9 +109,7 @@ export const QuestoesAvaliacao = (
 
     estadoSelecionado?.id &&
       axios
-        .get(
-          `/api/municipio/findMunicipiosByUf?ufId=${estadoSelecionado.id}`
-        )
+        .get(`/api/municipio/findMunicipiosByUf?ufId=${estadoSelecionado.id}`)
         .then((response: AxiosResponse<Municipio[]>) =>
           setMunicipios(response.data)
         );
@@ -180,7 +177,7 @@ export const QuestoesAvaliacao = (
     }
   };
 
-  const theme = useTheme()
+  const theme = useTheme();
 
   return (
     <VFlow>
@@ -196,6 +193,20 @@ export const QuestoesAvaliacao = (
 
       <form autoComplete="off">
         <VFlow>
+          <HFlow justifyContent="center">
+            <Heading
+              color="normal"
+              level={1}
+              style={{ paddingTop: "2rem", paddingBottom: "2rem" }}
+            >
+              {questionarioId === 1
+                ? "Escala Santa Catarina Transparente"
+                : "Avaliação cidadã de transparência municipal"}
+            </Heading>
+          </HFlow>
+          <Paper style={{padding: '1rem', width: '23rem'}}>
+            <Text fontSize={1} fontWeight='bold' >Informações para a avaliação</Text>
+            <VFlow>
           <MaskedInput
             mask={maskCpf}
             guide={false}
@@ -211,7 +222,7 @@ export const QuestoesAvaliacao = (
                 inputRef={ref}
                 {...props}
                 error={errorList.includes("nuCpf") && "Favor preencher o CPF"}
-                clearable = {false}
+                clearable={false}
               />
             )}
           />
@@ -224,7 +235,7 @@ export const QuestoesAvaliacao = (
             value={estadoSelecionado}
             error={errorList.includes("estado") && "Favor preencher o Estado"}
             style={{ width: "20rem" }}
-            clearable = {false}
+            clearable={false}
           />
           <Tooltip
             text={!estadoSelecionado ? "Primeiro preencha o Estado" : ""}
@@ -241,35 +252,49 @@ export const QuestoesAvaliacao = (
               onChange={handleMunicipioSelect}
               style={{ width: "20rem" }}
               disabled={!estadoSelecionado}
-              clearable = {false}
+              clearable={false}
               error={
                 errorList.includes("municipio") && "Favor preencher o Município"
               }
             />
           </Tooltip>
+          </VFlow>
+          </Paper>
           <VFlow vSpacing={2}>
             {questoes[key].map((questaoItem, idx) => {
               const questaoPath = `questoes[${key}][${idx}].resposta`;
               return (
                 <div key={questaoItem.id}>
-                  <HFlow hSpacing={0.5} alignItems='center'>
-                  <Text fontWeight='bold' fontSize={1}>{`${idx + 1}. `}{questaoItem.nome} </Text> 
-                  {questaoItem.descricao && (
-                    <Tooltip text={questaoItem.descricao}>
-                       <Icon icon='infoCircleFilled' size={1} style={{'&:hover': {color: theme.pallete.primary.main}}}/>  
-                    </Tooltip>
-                  )}
-                  {errorList.includes(questaoPath) && <Text fontWeight='bold' fontSize={1} color='danger'> *</Text>}
+                  <HFlow hSpacing={0.5} alignItems="center">
+                    <Text fontWeight="bold" fontSize={1}>
+                      {`${idx + 1}. `}
+                      {questaoItem.nome}{" "}
+                    </Text>
+                    {questaoItem.descricao && (
+                      <Tooltip text={questaoItem.descricao}>
+                        <Icon
+                          icon="infoCircleFilled"
+                          size={1}
+                          style={{
+                            "&:hover": { color: theme.pallete.primary.main },
+                          }}
+                        />
+                      </Tooltip>
+                    )}
+                    {errorList.includes(questaoPath) && (
+                      <Text fontWeight="bold" fontSize={1} color="danger">
+                        {" "}
+                        *
+                      </Text>
+                    )}
                   </HFlow>
                   {errorList.includes(questaoPath) && (
                     <>
-                    <br />
-                    <Text color='danger'>
-                      Favor responder esta questão
-                    </Text>
+                      <br />
+                      <Text color="danger">Favor responder esta questão</Text>
                     </>
                   )}
-                  <VFlow style={{paddingTop: '1rem'}}>
+                  <VFlow style={{ paddingTop: "1rem" }}>
                     <Radio
                       label="Sim"
                       value={1}
@@ -291,15 +316,14 @@ export const QuestoesAvaliacao = (
                       onChange={() => formik.setFieldValue(questaoPath, false)}
                     />
                   </VFlow>
-                  
                 </div>
               );
             })}
           </VFlow>
 
-          <HFlow>
+          <HFlow justifyContent="flex-end">
             <Button
-              size="small"
+              size="medium"
               onClick={previousStep}
               disabled={currentStep === 0}
             >
@@ -307,7 +331,7 @@ export const QuestoesAvaliacao = (
             </Button>
             {currentStep === maxStep ? (
               <Button
-                size="small"
+                size="medium"
                 type="button"
                 kind="primary"
                 onClick={handleSubmitClick}
@@ -315,7 +339,7 @@ export const QuestoesAvaliacao = (
                 Enviar
               </Button>
             ) : (
-              <Button size="small" kind="primary" onClick={handleNextStep}>
+              <Button size="medium" kind="primary" onClick={handleNextStep}>
                 Avançar
               </Button>
             )}

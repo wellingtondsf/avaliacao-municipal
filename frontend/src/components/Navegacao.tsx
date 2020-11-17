@@ -22,7 +22,7 @@ import { CompararMunicipio } from "./CompararMunicipio";
 
 export interface CustonLinkProsp extends ButtonProps {
   link: string;
-  label: string
+  label: any
 }
 
 export function CustomLink(props: CustonLinkProsp) {
