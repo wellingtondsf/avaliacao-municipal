@@ -15,6 +15,9 @@
 
 ## 🚀 Aplicação
 
+<p align="center"> 
+  <img alt="Aplicacao" src="./frontend/public/images/compararMunicipios.png" >
+</p>
 
 ## 🛠 Tecnologias
 
@@ -33,7 +36,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
  - [Java](https://www.java.com/pt-BR/)
  - [Spring](https://spring.io/)
  - [Lombock](https://projectlombok.org/)
- - 
 
 ## 💻 Projeto
 
