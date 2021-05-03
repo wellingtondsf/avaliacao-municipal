@@ -41,6 +41,27 @@ Desenvolvimento de uma plataforma web para que seja possível avaliar o nível d
 
 ## ✨ Como executar
 
+```bash
+# Clone o repositório
+$ git clone https://github.com/wellingtondsf/avaliacao-municipal
+
+# Entre na pasta do repositório
+$ cd avaliacao-municipal
+
+# Inicie o container docker
+$ docker start avaliacao-municipal
+
+# Inicie o servidor
+# Execute a seguinte classe AvaliacaoMunicipalApplication.java localizada no backend
+
+# Na pasta raiz da aplicacao entre em frontend
+# Instale as dependências
+$ yarn install
+
+# Inicie o servidor da aplicação
+# servidor iniciara na porta 3000
+$ yarn dev
+```
 
 ## 📜 Licença
 
